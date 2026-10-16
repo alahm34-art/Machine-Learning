@@ -1,0 +1,996 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>بيت تعلم الآلة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&family=Readex+Pro:wght@500;700&display=swap">
+<style>
+/* Layout: one calm reading column (max 720px), RTL, a sticky progress strip; lessons run as a 5-step track. */
+:root{
+  --bg:#F1F4F2; --surface:#FFFFFF; --ink:#15212A; --muted:#5A6771; --line:#D9E0DC;
+  --accent:#0D6B60; --accent-ink:#FFFFFF; --accent-soft:#DCEFEA;
+  --key:#9A5B08; --key-soft:#FBF0DD;
+  --ok:#2D8547; --ok-soft:#E2F3E6; --bad:#B42318; --bad-soft:#FCE9E7;
+  --f-ar:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif;
+  --f-en:"IBM Plex Sans","Segoe UI",Arial,sans-serif;
+  --f-disp:"Readex Pro","IBM Plex Sans Arabic",sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E1417; --surface:#162027; --ink:#E6ECE9; --muted:#9BA8AF; --line:#25323A;
+  --accent:#3BBFA9; --accent-ink:#06211C; --accent-soft:#11332D;
+  --key:#E7AE57; --key-soft:#33270F;
+  --ok:#5CC57C; --ok-soft:#12301E; --bad:#F27A66; --bad-soft:#3A1915; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0E1417; --surface:#162027; --ink:#E6ECE9; --muted:#9BA8AF; --line:#25323A;
+  --accent:#3BBFA9; --accent-ink:#06211C; --accent-soft:#11332D;
+  --key:#E7AE57; --key-soft:#33270F;
+  --ok:#5CC57C; --ok-soft:#12301E; --bad:#F27A66; --bad-soft:#3A1915; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ar);font-size:17px;line-height:1.75;direction:rtl}
+#app{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:0 48px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.toprow{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.brand{font-family:var(--f-disp);font-weight:700;font-size:20px;margin:0;text-wrap:balance}
+.bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:8px}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s}
+.meta{font-size:14px;color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:700;background:var(--accent);color:var(--accent-ink);min-height:48px}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.btn.small{min-height:38px;padding:6px 12px;font-size:15px}
+.btn:focus-visible,.opt:focus-visible,.row:focus-visible{outline:3px solid var(--key);outline-offset:2px}
+.btn[disabled]{opacity:.45;cursor:default}
+.linkbtn{background:none;border:0;color:var(--accent);font-weight:500;padding:0;text-decoration:underline;text-underline-offset:3px}
+h2{font-family:var(--f-disp);font-size:24px;margin:0 0 4px;text-wrap:balance}
+h3{font-family:var(--f-disp);font-size:19px;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 14px;font-size:15px}
+.en{font-family:var(--f-en);direction:ltr;unicode-bidi:isolate}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.stack{display:grid;gap:14px}
+.review{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--key-soft);border:1px solid color-mix(in srgb,var(--key) 35%,transparent);border-radius:var(--r);padding:14px 16px}
+.method{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.method div{background:var(--accent-soft);border-radius:10px;padding:8px 4px;text-align:center;font-size:13px;line-height:1.4}
+.method b{display:block;font-size:15px}
+.chap{display:grid;gap:10px}
+.chhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.day{font-size:13px;letter-spacing:.04em;color:var(--muted);font-weight:700;margin:10px 0 2px}
+.row{display:flex;align-items:center;gap:12px;width:100%;text-align:right;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-height:60px}
+.row .num{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--accent-soft);color:var(--accent);font-variant-numeric:tabular-nums}
+.row .tx{flex:1;min-width:0}
+.row .tx b{display:block;font-size:16px}
+.row .tx span{font-size:13px;color:var(--muted)}
+.chip{font-size:13px;font-weight:700;border-radius:99px;padding:3px 10px;white-space:nowrap}
+.chip.lock{background:var(--line);color:var(--muted)}
+.chip.go{background:var(--accent);color:var(--accent-ink)}
+.chip.done{background:var(--ok-soft);color:var(--ok)}
+.chip.retry{background:var(--bad-soft);color:var(--bad)}
+.row.locked{opacity:.6}
+.soon{border-style:dashed}
+.steps{display:flex;gap:6px;margin:4px 0 16px;flex-wrap:wrap}
+.steps span{flex:1;min-width:56px;text-align:center;font-size:13px;padding:6px 4px;border-radius:9px;background:var(--line);color:var(--muted);font-weight:500}
+.steps span.on{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.steps span.past{background:var(--accent-soft);color:var(--accent)}
+.hook{border-inline-start:4px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.card .place{display:inline-block;font-size:14px;background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:2px 12px;margin-bottom:8px;font-weight:500}
+.card .term{font-family:var(--f-en);direction:ltr;text-align:right;font-weight:600;font-size:22px;margin:0}
+.card .syl{font-family:var(--f-en);direction:ltr;text-align:right;color:var(--accent);font-size:15px;letter-spacing:.03em}
+.card .ar{color:var(--muted);font-size:15px;margin-bottom:8px}
+.card .idea{margin:6px 0 12px}
+.exam{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+.exam .lbl{font-size:12px;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.exam .e{font-family:var(--f-en);direction:ltr;text-align:left;font-size:15.5px;line-height:1.6;margin:4px 0 6px}
+.exam .ea{font-size:15px;color:var(--muted)}
+.kw{display:flex;align-items:center;gap:10px;margin-top:12px;background:var(--key-soft);border-radius:10px;padding:8px 12px}
+.kw .k1{font-family:var(--f-en);font-weight:600;color:var(--key);font-size:19px;direction:ltr}
+.kw .k2{font-weight:700}
+.kw small{color:var(--muted);font-size:12px;margin-inline-start:auto}
+.dots{display:flex;gap:6px;justify-content:center;margin:12px 0}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--accent);width:20px;border-radius:99px}
+.nav{display:flex;gap:10px;justify-content:space-between;margin-top:14px}
+.q{font-family:var(--f-en);direction:ltr;text-align:left;font-size:18px;font-weight:500;line-height:1.55;margin:0}
+.qa{color:var(--muted);font-size:15px;margin:6px 0 14px}
+.opts{display:grid;gap:10px}
+.opt{display:block;width:100%;text-align:left;direction:ltr;font-family:var(--f-en);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font-size:16px;min-height:52px}
+.opt.tf{font-family:var(--f-ar);text-align:center;direction:rtl}
+.opt:hover:not([disabled]){border-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{border-radius:12px;padding:12px 14px;margin-top:12px}
+.fb.ok{background:var(--ok-soft)} .fb.no{background:var(--bad-soft)}
+.fb b.t{display:block}
+.qcount{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.big{font-family:var(--f-disp);font-size:54px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.check{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.check:last-child{border-bottom:0}
+.check input{width:22px;height:22px;margin-top:3px;accent-color:var(--accent);flex:0 0 22px}
+.reveal{background:var(--accent-soft);border-radius:10px;padding:12px 14px;margin-top:10px}
+.thread p{margin:0 0 10px}
+.save{font-size:12px;color:var(--muted)}
+@media (max-width:460px){ .method{grid-template-columns:repeat(5,1fr)} .method div{font-size:11px} .method b{font-size:13px} .big{font-size:44px} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+
+<div id="app"></div>
+
+<script>
+// ===== Content: Machine Learning in Cybersecurity — Ch1 & Ch2 =====
+// card: t term, s syllables, a arabic, p place, i idea (simple Arabic), e exam sentence (slide text), ea Arabic, k [keyword, ar]
+// quiz: {q (exam-style EN), qa (Arabic), o [options], c correct index, w (why, Arabic)}  — TF uses o: TF
+const TF = ["True – صح", "False – خطأ"];
+
+const CHAPTERS = [
+{
+ id: "ch1", n: 1, title: "الفصل الأول: مقدمة", en: "Chapter 1: Introduction",
+ days: [{d: 1, lessons: ["L1","L2","L3"]}, {d: 2, lessons: ["L4","L5","L6"]}, {d: 3, lessons: ["L7","L8","L9"]}],
+ thread: [
+  "الفصل كله قصة واحدة من أربع حلقات، وكل حلقة تحتاج التي قبلها:",
+  "١) <b>آلة تتعلم</b> من أمثلة بدل أن نبرمجها بقواعد (تعلم الآلة)، ولها ثلاث طرق حسب سؤال واحد: هل معنا أجوبة جاهزة؟ نعم = Supervised، لا = Unsupervised، تتعلم من مكافأة البيئة = Reinforcement.",
+  "٢) الآلة تحتاج <b>معرفة من بيانات ضخمة</b>، فنستخرجها بالتنقيب (Data Mining)، وهو الدرجة الخامسة في سلّم KDD من سبع درجات. وفئتا التنقيب هما نفس فكرة الطريقتين: بإشراف وبدون إشراف.",
+  "٣) نضع هذا في <b>الأمن السيبراني</b>: القفل التقليدي ثابت ويعرف المعروف فقط فيسقط أمام zero-day، فنبني نظامًا تكيفيًا، قلبه <b>محرك التحليل</b> = نموذج تعلم آلة.",
+  "٤) <b>الحلول</b>: استباقي يمنع قبل الهجوم، وتفاعلي (IDS) يكشف أثناءه. وأهم ربط في الفصل: <b>كشف التوقيع</b> يشبه Supervised (يعرف المسمّى المعروف، فأمثلته DT وRF وSVM)، و<b>كشف الشذوذ</b> يشبه Unsupervised (يتعلم الطبيعي ويكشف المنحرف، فأمثلته K-Means وAutoencoders وIsolation Forest). والهجين يجمعهما."
+ ]
+},
+{
+ id: "ch2", n: 2, title: "الفصل الثاني: نماذج التعلم الكلاسيكية", en: "Chapter 2: Classical ML Paradigms",
+ days: [{d: 4, lessons: ["L10","L11","L12"]}, {d: 5, lessons: ["L13","L14","L15"]}],
+ thread: [
+  "الفصل الثاني يكبّر عدسة الفصل الأول على «الآلة التي تتعلم»:",
+  "١) أين تقع؟ AI أكبر دائرة، داخلها ML، وداخلها DL. والفرق الجوهري عن البرمجة: نعطي البيانات والأجوبة فتُخرج الآلة البرنامج.",
+  "٢) كيف نعرف أنها تعلمت؟ تعريف <b>P-T-E</b>: أداؤها P في مهمة T يتحسن بالخبرة E.",
+  "٣) ماذا تتعلم؟ نفس الأنواع الثلاثة، لكن بتفصيل: Supervised إما تصنيف (فئات) أو انحدار (أرقام)، وUnsupervised إما تجميع أو كشف شواذ أو تقليل أبعاد.",
+  "٤) مما تتكوّن أي خوارزمية؟ <b>R-O-E</b>: تمثيل (شكل النموذج) ثم تقييم (كيف نحكم عليه) ثم تحسين (كيف نضبطه).",
+  "٥) والتعلم العميق خطوة أبعد: بدل أن يصمم الإنسان الخصائص، تتعلمها الطبقات بنفسها. ولكل نوع بيانات شبكته: صور = CNN، تسلسل = RNN/LSTM، بلا ملصقات وكشف شذوذ = Autoencoder. ثم تحديات تطبيقه في الأمن: بيانات، تفسير، سلبيات كاذبة منخفضة، تحديث مستمر."
+ ]
+}
+];
+
+const LESSONS = {
+// ------------------------------------------------------------------ CH1
+L1: { ch: "ch1", n: 1, title: "ما هو تعلم الآلة؟", en: "What is Machine Learning?",
+ hook: "كل المقرر يدور حول «آلة تتعلم». قبل الأنواع والخوارزميات، افهم ماذا تعني كلمة «تتعلم» هنا.",
+ guess: {q: "A machine learning model learns mainly from…", qa: "يتعلم نموذج تعلم الآلة أساسًا من…", o: ["training sample data", "rules written by a programmer", "user passwords"], c: 0},
+ cards: [
+  {t: "Machine Learning (General)", s: "Ma-chine Learn-ing", a: "التعريف العام", p: "🚪 البوابة – اللافتة العامة",
+   i: "التعريف البسيط: حاسوب (مورد حوسبي) يشغّل خوارزميات تعلّم.",
+   e: "Generally, machine learning is the process of applying a computing-based resource to implement learning algorithms.",
+   ea: "بشكل عام، تعلم الآلة هو عملية تطبيق مورد قائم على الحوسبة لتنفيذ خوارزميات التعلم.", k: ["Computing resource", "مورد حوسبي"]},
+  {t: "Machine Learning (Formal)", s: "Ma-chine Learn-ing", a: "التعريف الرسمي", p: "🚪 البوابة – الكاميرا الذكية",
+   i: "ثلاث كلمات تحفظها: <b>أنماط</b> تُكتشف تلقائيًا + <b>قرار</b> ذكي + بناءً على <b>عينة تدريب</b>. مثل كاميرا تتعرف على الوجوه وتقرر فتح الباب.",
+   e: "Formally, defined as the complex computation process of automatic pattern recognition and intelligent decision making based on training sample data.",
+   ea: "رسميًا: عملية الحساب المعقدة للتعرف التلقائي على الأنماط واتخاذ القرار الذكي بناءً على عينة بيانات التدريب.", k: ["Pattern + Decision", "نمط + قرار"]},
+  {t: "Analogy: Child & Cats", s: "An-al-o-gy", a: "تشبيه الطفل والقطط", p: "🧸 غرفة الأطفال – ألبوم الصور",
+   i: "لا تشرح للطفل شكل القطة، بل تريه آلاف الصور فيعرف قطة <b>لم يرها من قبل</b>. هذا هو التعلم: تعميم من الأمثلة إلى الجديد.",
+   e: "You don't explicitly tell them \"a cat has whiskers and pointy ears,\" but you show them thousands of pictures of cats and non-cats… so they can then correctly identify a cat in a photo they've never seen before.",
+   ea: "لا تخبره صراحةً بصفات القطة، بل تريه آلاف الصور… فيتعرف على قطة في صورة لم يرها من قبل.", k: ["Never seen", "لم يرها من قبل"]}
+ ],
+ why: {q: "لماذا نقول إن النموذج «تعلّم» ولم «يحفظ»؟ وما علاقة هذا بالأمن؟", a: "لأنه يتعرف على حالة <b>لم يرها من قبل</b>؛ يعمّم من الأمثلة. وهذا بالضبط ما نريده أمنيًا: أن يكشف هجومًا جديدًا لم يُسجَّل من قبل."},
+ teach: ["العام: مورد حوسبي ينفذ خوارزميات تعلم", "الرسمي: أنماط تلقائية + قرار ذكي + عينة تدريب", "الطفل والقطط: يتعلم من الأمثلة ويعرف ما لم يره"],
+ quiz: [
+  {q: "Formally, machine learning is the complex computation process of automatic pattern recognition and intelligent decision making based on training sample data.", qa: "رسميًا، تعلم الآلة هو عملية… بناءً على عينة بيانات التدريب.", o: TF, c: 0, w: "هذا التعريف الرسمي حرفيًا."},
+  {q: "Generally, machine learning is defined as automatic pattern recognition based on testing data.", qa: "بشكل عام، يُعرَّف تعلم الآلة بأنه تعرّف تلقائي على الأنماط بناءً على بيانات الاختبار.", o: TF, c: 1, w: "خطأ مركّب: التعريف العام = مورد حوسبي ينفذ خوارزميات تعلم، والرسمي يعتمد على بيانات <b>التدريب</b> لا الاختبار."},
+  {q: "The formal definition of ML is based on:", qa: "يعتمد التعريف الرسمي على:", o: ["training sample data", "explicit programming", "firewall rules", "user passwords"], c: 0, w: "based on training sample data."},
+  {q: "In the analogy, the child's brain represents:", qa: "في التشبيه، دماغ الطفل يمثل:", o: ["the AI model", "the training data", "the programmer", "the test photo"], c: 0, w: "The child's brain (the AI model)."},
+  {q: "In the analogy, you explicitly tell the child \"a cat has whiskers and pointy ears\".", qa: "في التشبيه، تخبر الطفل صراحةً أن للقطة شوارب.", o: TF, c: 1, w: "You <b>don't</b> explicitly tell them؛ تريه الصور فقط."}
+ ]},
+
+L2: { ch: "ch1", n: 2, title: "أنواع التعلم الثلاثة", en: "Types of Learning (3)",
+ hook: "الفرق بين الأنواع الثلاثة سؤال واحد فقط: <b>هل معك أجوبة جاهزة (ملصقات)؟</b> نعم = Supervised. لا، فقط ابحث عن الشكل = Unsupervised. لا بيانات أصلًا، تتعلم من مكافأة = Reinforcement.",
+ guess: {q: "Learning from data where every example already has its correct answer is called…", qa: "التعلم من بيانات لكل مثال فيها جوابه الصحيح يسمى…", o: ["Supervised", "Unsupervised", "Reinforcement"], c: 0},
+ cards: [
+  {t: "Supervised Learning", s: "Su-per-vised Learn-ing", a: "التعلم الخاضع للإشراف", p: "🍳 المطبخ – مُشرف ومقادير مكتوبة",
+   i: "مُعلّم يعطيك أمثلة وكل مثال عليه جوابه (ملصق). تتدرب، ثم تتنبأ بجديد.<br>مثال أمني: <b>Malware detection</b> بأشجار القرار أو الشبكات العصبية.",
+   e: "The algorithm is trained on labeled data (e.g., \"normal traffic\" or \"malicious traffic\"). The goal is to make predictions on new data.",
+   ea: "تُدرَّب الخوارزمية على بيانات مسمّاة (حركة طبيعية/خبيثة)، والهدف التنبؤ ببيانات جديدة.", k: ["Labeled", "مُسمّاة"]},
+  {t: "Unsupervised Learning", s: "Un-su-per-vised Learn-ing", a: "التعلم غير الخاضع للإشراف", p: "🧺 غرفة الغسيل – تفرز بنفسها",
+   i: "لا أجوبة. الخوارزمية تكتشف المجموعات والأنماط المخفية <b>بنفسها</b>.<br>مثال أمني: <b>Anomaly detection</b> لسلوك مستخدم أو جهاز IoT.",
+   e: "The algorithm analyzes unlabeled data to find hidden patterns or clusters on its own.",
+   ea: "تحلل الخوارزمية بيانات غير مسمّاة لتجد أنماطًا مخفية أو مجموعات بنفسها.", k: ["On its own", "بنفسها"]},
+  {t: "Reinforcement Learning", s: "Re-in-force-ment Learn-ing", a: "التعلم المعزز", p: "🎮 صالة الجلوس – لعبة فيديو",
+   i: "<b>وكيل</b> يجرب في <b>بيئة</b>: فوز = مكافأة، خسارة = عقوبة، فيتعلم القرار الأفضل.<br>مثال أمني: وكيل AI يتعلم <b>حجب أو إعادة توجيه</b> الحركة الخبيثة.",
+   e: "An \"agent\" learns to make decisions by interacting with an environment and receiving rewards or penalties.",
+   ea: "وكيل يتعلم اتخاذ القرارات بالتفاعل مع بيئة وتلقي مكافآت أو عقوبات.", k: ["Reward", "مكافأة"]}
+ ],
+ why: {q: "لماذا كشف البرمجيات الخبيثة Supervised، بينما سلوك جهاز IoT غير خاضع للإشراف؟", a: "في البرمجيات الخبيثة لدينا عينات معروفة ومسمّاة (خبيث/آمن) فنعلّم بها. أما سلوك الجهاز فلا نعرف مسبقًا شكل الهجوم، فنتعلم الطبيعي ونكشف ما ينحرف عنه."},
+ teach: ["السؤال الحاسم: هل توجد ملصقات؟", "Supervised: Labeled، مثال Malware detection", "Unsupervised: On its own، مثال IoT anomaly", "Reinforcement: Agent + Reward، مثال حجب الحركة الخبيثة"],
+ quiz: [
+  {q: "In supervised learning, the algorithm is trained on unlabeled data.", qa: "في التعلم الخاضع للإشراف تُدرَّب الخوارزمية على بيانات غير مسمّاة.", o: TF, c: 1, w: "Supervised = <b>labeled</b>."},
+  {q: "An agent learns to make decisions by interacting with an environment and receiving rewards or penalties. This is:", qa: "وكيل يتعلم بالتفاعل مع بيئة ومكافآت وعقوبات. هذا:", o: ["Reinforcement learning", "Supervised learning", "Unsupervised learning", "Data mining"], c: 0, w: "agent + reward = Reinforcement."},
+  {q: "The algorithm analyzes unlabeled data to find hidden patterns or clusters on its own. This is:", qa: "تحليل بيانات غير مسمّاة لإيجاد أنماط أو مجموعات بنفسها:", o: ["Unsupervised learning", "Supervised learning", "Reinforcement learning", "Parametric statistics"], c: 0, w: "on its own = Unsupervised."},
+  {q: "Malware detection using decision tree models or neural networks is an example of:", qa: "كشف البرمجيات الخبيثة بأشجار القرار أو الشبكات العصبية مثال على:", o: ["Supervised learning", "Unsupervised learning", "Reinforcement learning"], c: 0, w: "مثال المنهج للخاضع للإشراف."},
+  {q: "An AI agent learns to block or redirect malicious traffic to maximize network security. This is reinforcement learning.", qa: "وكيل يتعلم حجب الحركة الخبيثة لتعظيم الأمن: تعلم معزز.", o: TF, c: 0, w: "مثال المنهج للتعلم المعزز."},
+  {q: "Anomaly detection of a user's or IoT device's behavior is an example of:", qa: "كشف الشذوذ في سلوك مستخدم أو جهاز IoT مثال على:", o: ["Unsupervised learning", "Supervised learning", "Reinforcement learning"], c: 0, w: "مثال المنهج لغير الخاضع للإشراف."}
+ ]},
+
+L3: { ch: "ch1", n: 3, title: "المُصنِّف، والبارامتري، وهدف التعلم", en: "Classifier, Parametric & the Goal",
+ hook: "الآن بعد أن عرفت الأنواع: النموذج الذي يتعلمه Supervised يسمى <b>مُصنِّفًا</b>، وهو نوعان حسب سؤال: هل نفترض شكل البيانات مسبقًا؟ ثم ما هدفنا منه في الأمن؟",
+ guess: {q: "A model that assumes the data follows a known distribution is…", qa: "النموذج الذي يفترض أن البيانات تتبع توزيعًا معروفًا هو…", o: ["Parametric", "Nonparametric"], c: 0},
+ cards: [
+  {t: "Classifier Model", s: "Clas-si-fi-er Mod-el", a: "نموذج المُصنِّف", p: "🧥 خزانة الملابس – الخيّاط",
+   i: "الخيّاط يأخذ مقاسات كثيرة (أنماط تدريب) ليقدّر شكل الثوب (النموذج). والثوب إما جاهز أو تفصيل.",
+   e: "Machine-learning methods use training patterns to learn or estimate the form of a classifier model. The models can be parametric or unparametric.",
+   ea: "طرق تعلم الآلة تستخدم أنماط التدريب لتتعلم أو تقدّر شكل نموذج المصنف، والنماذج بارامترية أو غير بارامترية.", k: ["Training patterns", "أنماط التدريب"]},
+  {t: "Parametric", s: "Pa-ra-met-ric", a: "البارامتري", p: "🧥 مقاسات جاهزة S/M/L",
+   i: "مقاسات جاهزة = <b>افتراض مسبق</b> عن شكل أجسام الناس (توزيع المجتمع).",
+   e: "Parametric statistics are based on assumptions about the distribution of population from which the sample was taken.",
+   ea: "الإحصاء البارامتري مبني على افتراضات حول توزيع المجتمع الذي أُخذت منه العينة.", k: ["Assumptions", "افتراضات"]},
+  {t: "Nonparametric", s: "Non-pa-ra-met-ric", a: "غير البارامتري", p: "🧵 تفصيل حسب الطلب",
+   i: "تفصيل على صاحبه = <b>بلا افتراض</b>؛ العينة لا تتبع توزيعًا محددًا.",
+   e: "Nonparametric statistics are not based on assumptions, that is, the data can be collected from a sample that does not follow a specific distribution.",
+   ea: "غير البارامتري لا يعتمد على افتراضات؛ العينة قد لا تتبع توزيعًا محددًا.", k: ["No distribution", "بلا توزيع"]},
+  {t: "Goal of ML", s: "Goal", a: "هدف الخوارزميات", p: "🎯 الممر – لوحة السهام",
+   i: "سهامك محدودة (بيانات <b>finite</b>)، وهدفك تقليل الرميات الخاطئة (خطأ التصنيف).",
+   e: "The goal of using machine-learning algorithms is to reduce the classification error on the given training sample data which are finite.",
+   ea: "الهدف تقليل خطأ التصنيف على عينة التدريب المعطاة، وهي محدودة.", k: ["Finite", "محدودة"]},
+  {t: "False Negatives / False Positives", s: "False Neg-a-tives · False Pos-i-tives", a: "السلبيات والإيجابيات الكاذبة", p: "🔔 الممر – جرس الإنذار",
+   i: "<b>FN</b>: لص دخل والجرس لم يرن (تهديد حقيقي فاتنا).<br><b>FP</b>: الجرس رنّ للقطة (تنبيه بلا داعٍ).<br>الهدف: <b>التوازن</b> بينهما.",
+   e: "In the context of cybersecurity, the main goal is to find the right balance between detecting real threats (reducing \"false negatives\") and not triggering too many unnecessary alerts (reducing \"false positives\").",
+   ea: "الهدف في الأمن: التوازن بين كشف التهديدات الحقيقية (تقليل FN) وعدم كثرة التنبيهات غير الضرورية (تقليل FP).", k: ["Balance", "توازن"]}
+ ],
+ why: {q: "أيهما أخطر أمنيًا: FN أم FP؟ ولماذا لا نقلل واحدًا فقط؟", a: "FN أخطر (هجوم حقيقي مرّ دون كشف)، لكن لو ركّزنا عليه وحده سيرن الجرس لكل شيء فتغرق في تنبيهات كاذبة وتتجاهلها. لذلك المنهج يقول: <b>balance</b>."},
+ teach: ["المصنف يُبنى من أنماط التدريب", "Parametric = افتراضات عن التوزيع", "Nonparametric = بلا توزيع محدد", "الهدف: تقليل خطأ التصنيف على بيانات محدودة", "في الأمن: توازن FN وFP"],
+ quiz: [
+  {q: "Parametric statistics are not based on assumptions about the population distribution.", qa: "الإحصاء البارامتري لا يعتمد على افتراضات حول توزيع المجتمع.", o: TF, c: 1, w: "هذا وصف <b>Nonparametric</b>. البارامتري = assumptions."},
+  {q: "Statistics where the sample does not follow a specific distribution are:", qa: "الإحصاء الذي لا تتبع عينته توزيعًا محددًا:", o: ["Nonparametric", "Parametric", "Supervised", "Classification"], c: 0, w: "No distribution = Nonparametric."},
+  {q: "The goal of ML algorithms is to reduce the classification error on training sample data which are finite.", qa: "هدف الخوارزميات تقليل خطأ التصنيف على بيانات تدريب محدودة.", o: TF, c: 0, w: "finite = محدودة. نص المنهج."},
+  {q: "Reducing \"false negatives\" means:", qa: "تقليل السلبيات الكاذبة يعني:", o: ["detecting real threats", "triggering fewer unnecessary alerts", "using more training data", "removing noise"], c: 0, w: "detecting real threats (reducing false negatives)."},
+  {q: "In cybersecurity, the main goal is only to reduce false positives.", qa: "في الأمن السيبراني الهدف فقط تقليل الإيجابيات الكاذبة.", o: TF, c: 1, w: "كلمة <b>only</b> هي الفخ؛ الهدف التوازن بين الاثنين."}
+ ]},
+
+L4: { ch: "ch1", n: 4, title: "التنقيب في البيانات وفئتاه", en: "Data Mining & its 2 Categories",
+ hook: "الآلة تحتاج معرفة من بيانات ضخمة، والتنقيب هو من يستخرجها. ولاحظ الربط: <b>فئتا التنقيب هما نفس فكرة Supervised وUnsupervised</b> من الدرس الثاني.",
+ guess: {q: "\"Clustering\" belongs to which data mining category?", qa: "التجميع ينتمي لأي فئة تنقيب؟", o: ["Unsupervised", "Supervised"], c: 0},
+ cards: [
+  {t: "Why Data Mining?", s: "Da-ta Min-ing", a: "لماذا نحتاج التنقيب؟", p: "📦 المخزن – لصوص حوله",
+   i: "بيانات كثيرة جدًا + مجرمون يحاولون الوصول إليها = نحتاج التنقيب + تعلم الآلة + الإحصاء معًا.",
+   e: "Due to the availability of large amounts of data in cyberinfrastructure and the number of cyber criminals attempting to gain access to the data, data mining, machine learning, statistics, and other interdisciplinary capabilities are needed to address the challenges of cybersecurity.",
+   ea: "بسبب البيانات الضخمة وكثرة المجرمين، نحتاج التنقيب وتعلم الآلة والإحصاء لمواجهة تحديات الأمن.", k: ["Criminals", "مجرمون"]},
+  {t: "Data Mining", s: "Da-ta Min-ing", a: "التنقيب في البيانات", p: "📦 المخزن – تحفر بين الكراتين",
+   i: "استخراج <b>معرفة</b> من كومة بيانات كبيرة، بأدوات إحصاء ورياضيات وتعلم آلة. فائدته: إيجاد المخترقين وحفظ الخصوصية.",
+   e: "Data mining is the extraction, or \"mining,\" of knowledge from a large amount of data.",
+   ea: "التنقيب هو استخراج المعرفة من كمية كبيرة من البيانات.", k: ["Extraction", "استخراج"]},
+  {t: "Supervised Data Mining", s: "Su-per-vised Min-ing", a: "التنقيب الخاضع للإشراف", p: "🍳 المطبخ – وصفات مجرّبة",
+   i: "يتنبأ بـ<b>دالة مخفية</b> من بيانات التدريب. نوعاه: <b>Classification + Prediction</b>.<br>أمثلته الأربعة: Spam filter (spam/ham)، Malware (malicious/safe)، Network attack (malicious/normal)، User behavior (normal/abnormal).",
+   e: "Supervised data-mining techniques predict a hidden function using training data. Examples of supervised mining are classification and prediction. For example, a spam filter is a supervised classifier, trained on thousands of emails labeled \"spam\" or \"ham\" to recognize new spam.",
+   ea: "يتنبأ بدالة مخفية من بيانات التدريب؛ أمثلته التصنيف والتنبؤ، مثل فلتر البريد المزعج المدرب على رسائل spam/ham.", k: ["Hidden function", "دالة مخفية"]},
+  {t: "Unsupervised Data Mining", s: "Un-su-per-vised Min-ing", a: "التنقيب غير الخاضع للإشراف", p: "🧺 غرفة الغسيل – بلا ملصقات",
+   i: "يجد أنماطًا مخفية <b>بلا بيانات تدريب</b>. نوعاه: <b>Clustering + Associative rule mining</b>.<br>أمثلته: جهاز يرسل بيانات أكثر بكثير من المعتاد، سلوك غير منتظم، اتصال من <b>موقع غير معتاد أو وقت غريب</b>.",
+   e: "Unsupervised data mining is an attempt to identify hidden patterns from given data without introducing training data (i.e., pairs of input and class labels). Typical examples of unsupervised mining are clustering and associative rule mining.",
+   ea: "محاولة لتحديد أنماط مخفية دون إدخال بيانات تدريب؛ أمثلته التجميع والتنقيب عن قواعد الارتباط.", k: ["Clustering", "تجميع"]}
+ ],
+ why: {q: "لماذا يُعتبر فلتر البريد المزعج Supervised؟", a: "لأنه تدرّب على آلاف الرسائل <b>عليها ملصق</b> (spam أو ham). وجود الملصق = إشراف. وهذا نفس سؤال الدرس الثاني."},
+ teach: ["DM = استخراج معرفة من بيانات ضخمة", "Supervised mining: Classification + Prediction (4 أمثلة)", "Unsupervised mining: Clustering + Association rules (3 أمثلة)"],
+ quiz: [
+  {q: "Examples of supervised mining are clustering and associative rule mining.", qa: "أمثلة التنقيب الخاضع للإشراف: التجميع وقواعد الارتباط.", o: TF, c: 1, w: "هذه أمثلة <b>Unsupervised</b>. الخاضع للإشراف = classification + prediction."},
+  {q: "A spam filter trained on emails labeled \"spam\" or \"ham\" is a:", qa: "فلتر البريد المدرب على رسائل مسمّاة هو:", o: ["supervised classifier", "unsupervised classifier", "reinforcement agent", "clustering method"], c: 0, w: "labeled = supervised."},
+  {q: "Identifying hidden patterns without introducing training data is:", qa: "تحديد أنماط مخفية دون بيانات تدريب:", o: ["Unsupervised data mining", "Supervised data mining", "Data integration", "Classification"], c: 0, w: "without training data = Unsupervised."},
+  {q: "Data mining is the extraction of knowledge from a large amount of data.", qa: "التنقيب هو استخراج المعرفة من كمية كبيرة من البيانات.", o: TF, c: 0, w: "التعريف حرفيًا."},
+  {q: "Identifying a connection from an unusual location or at a strange time is an example of:", qa: "تحديد اتصال من موقع غير معتاد أو في وقت غريب مثال على:", o: ["Unsupervised data mining", "Supervised data mining", "Knowledge representation"], c: 0, w: "من أمثلة التنقيب غير الخاضع للإشراف."},
+  {q: "User Behavior Analysis (normal or abnormal) is listed under:", qa: "تحليل سلوك المستخدم (طبيعي/غير طبيعي) يندرج تحت:", o: ["Supervised data mining", "Unsupervised data mining", "Scan detection"], c: 0, w: "في المنهج هو رابع أمثلة الخاضع للإشراف."}
+ ]},
+
+L5: { ch: "ch1", n: 5, title: "سلّم اكتشاف المعرفة KDD", en: "KDD – 7 Steps",
+ hook: "التنقيب الذي تعلمته ليس العملية كلها، بل <b>الدرجة الخامسة</b> في سلّم من سبع درجات اسمه KDD. احفظ الترتيب بجملة: <b>Can I See The Magic Pattern, Kid?</b>",
+ guess: {q: "In KDD, data mining is step number…", qa: "في KDD، التنقيب هو الخطوة رقم…", o: ["5", "1", "7"], c: 0},
+ cards: [
+  {t: "KDD", s: "K-D-D", a: "اكتشاف المعرفة في قواعد البيانات", p: "🪜 الدرج – 7 درجات",
+   i: "عملية <b>تكرارية</b> تصعد من البيانات الخام إلى معرفة جديدة، والتنقيب جزء لا يتجزأ منها.",
+   e: "Data mining is also an integral part of knowledge discovery in databases (KDDs), an iterative process of the nontrivial extraction of information from data… KDD includes several steps from the collection of raw data to the creation of new knowledge.",
+   ea: "التنقيب جزء من KDD، وهي عملية تكرارية لاستخراج غير بديهي للمعلومات، من البيانات الخام إلى معرفة جديدة.", k: ["Iterative", "تكرارية"]},
+  {t: "1 Data Cleaning (C)", s: "Da-ta Clean-ing", a: "تنظيف البيانات", p: "🧺 الدرجة 1 – الغسالة",
+   i: "إزالة <b>الضوضاء</b> والبيانات غير المهمة. حاسمة أمنيًا لأن البيانات <b>غير متوازنة</b> (طبيعي أكثر بكثير من الهجمات) فيتحيّز النموذج.",
+   e: "Data cleaning, which is also known as data cleansing, noise and irrelevant data are removed from the collection. This step is crucial in cybersecurity, where data is often imbalanced.",
+   ea: "تُزال الضوضاء والبيانات غير ذات الصلة؛ خطوة حاسمة لأن البيانات غالبًا غير متوازنة.", k: ["Noise", "ضوضاء"]},
+  {t: "2 Data Integration (I)", s: "In-te-gra-tion", a: "دمج البيانات", p: "🍹 الدرجة 2 – الخلاط",
+   i: "مصادر <b>متعددة وغير متجانسة</b> في قاعدة بيانات <b>واحدة</b>.",
+   e: "Data integration combines data from multiple and heterogeneous sources into one database.",
+   ea: "يجمع البيانات من مصادر متعددة وغير متجانسة في قاعدة واحدة.", k: ["Heterogeneous", "غير متجانسة"]},
+  {t: "3 Data Selection (S)", s: "Se-lec-tion", a: "اختيار البيانات", p: "🥄 الدرجة 3 – ملعقة سكر",
+   i: "تمثيل <b>مصغّر</b> يحفظ سلامة الأصل (نفس الطعم بحجم أصغر).",
+   e: "Data-selection techniques allow the user to obtain a reduced representation of the data set to keep the integrity of the original data set in a reduced volume.",
+   ea: "تمثيل مصغر يحافظ على سلامة المجموعة الأصلية بحجم أصغر.", k: ["Reduced", "مصغّر"]},
+  {t: "4 Data Transformation (T)", s: "Trans-for-ma-tion", a: "تحويل البيانات", p: "🍵 الدرجة 4 – السكر يذوب في الشاي",
+   i: "تحويل البيانات المختارة إلى <b>صيغ مناسبة</b>.",
+   e: "Data transformation, the selected data is transformed into suitable formats.",
+   ea: "تُحوَّل البيانات المختارة إلى صيغ مناسبة.", k: ["Formats", "صيغ"]},
+  {t: "5 Data Mining (M)", s: "Min-ing", a: "التنقيب", p: "🔦 الدرجة 5 – كشاف في المخزن",
+   i: "تطبيق <b>أدوات التحليل</b> لاكتشاف أنماط مفيدة.",
+   e: "Data mining is the stage in which analysis tools are applied to discover potentially useful patterns.",
+   ea: "المرحلة التي تُطبَّق فيها أدوات التحليل لاكتشاف أنماط مفيدة.", k: ["Analysis tools", "أدوات تحليل"]},
+  {t: "6 Pattern Evaluation (P)", s: "Pat-tern E-val-u-a-tion", a: "تقييم الأنماط", p: "🛠️ الدرجة 6 – مقياس الصواميل",
+   i: "اختيار المفيد من الأنماط بـ<b>مقاييس تحقق</b>.",
+   e: "Pattern evaluation identifies interesting and useful patterns using given validation measures.",
+   ea: "يحدد الأنماط المفيدة باستخدام مقاييس تحقق معطاة.", k: ["Validation", "تحقق"]},
+  {t: "7 Knowledge Representation (K)", s: "Rep-re-sen-ta-tion", a: "تمثيل المعرفة", p: "🚗 الدرجة 7 – تعرضها أمام الناس",
+   i: "المرحلة <b>الأخيرة</b>: عرض المعرفة للمستخدمين بشكل <b>مرئي</b>.",
+   e: "Knowledge representation, the final phase of the knowledge-discovery process, discovered knowledge is presented to the users in visual forms.",
+   ea: "المرحلة النهائية: تُعرض المعرفة المكتشفة للمستخدمين في أشكال مرئية.", k: ["Visual", "مرئي"]}
+ ],
+ why: {q: "لماذا يأتي التنظيف قبل التنقيب وليس بعده؟", a: "لأن النموذج يتعلم مما تعطيه. لو نقّبت في بيانات فيها ضوضاء وعدم توازن، سيكتشف أنماطًا خاطئة ويتحيّز للطبيعي. نظّف أولًا ثم ابحث."},
+ teach: ["KDD تكرارية ومن 7 خطوات", "الترتيب: Can I See The Magic Pattern, Kid?", "Cleaning أول، Mining خامس، Representation أخير ومرئي"],
+ quiz: [
+  {q: "The first step of KDD is:", qa: "أول خطوة في KDD:", o: ["Data cleaning", "Data mining", "Data selection", "Pattern evaluation"], c: 0, w: "C = Cleaning."},
+  {q: "The final phase of the knowledge-discovery process is:", qa: "المرحلة الأخيرة:", o: ["Knowledge representation", "Pattern evaluation", "Data mining", "Data transformation"], c: 0, w: "K = Knowledge representation (visual forms)."},
+  {q: "Obtaining a reduced representation of the data set while keeping its integrity is:", qa: "الحصول على تمثيل مصغر مع الحفاظ على السلامة:", o: ["Data selection", "Data integration", "Data cleaning", "Data transformation"], c: 0, w: "reduced = Selection."},
+  {q: "Combining data from multiple and heterogeneous sources into one database is:", qa: "دمج مصادر متعددة غير متجانسة في قاعدة واحدة:", o: ["Data integration", "Data selection", "Data mining", "Data cleaning"], c: 0, w: "heterogeneous = Integration."},
+  {q: "Data mining is the first step of KDD.", qa: "التنقيب هو أول خطوة في KDD.", o: TF, c: 1, w: "التنقيب الخامس، والأولى Cleaning."},
+  {q: "KDD is an iterative process of the nontrivial extraction of information from data.", qa: "KDD عملية تكرارية لاستخراج غير بديهي للمعلومات.", o: TF, c: 0, w: "iterative + nontrivial."},
+  {q: "Data cleaning is crucial in cybersecurity because data is often imbalanced.", qa: "التنظيف حاسم في الأمن لأن البيانات غالبًا غير متوازنة.", o: TF, c: 0, w: "much more normal traffic than attacks."}
+ ]},
+
+L6: { ch: "ch1", n: 6, title: "خوارزميات التعلم في الأمن", en: "ML Algorithms in Cybersecurity",
+ hook: "عرفت الطريقتين؛ الآن أسماء الخوارزميات تحت كل طريقة. القاعدة: إذا عرفت <b>الطريقة</b> عرفت مكان الخوارزمية في السؤال.",
+ guess: {q: "k-means clustering is…", qa: "خوارزمية k-means هي…", o: ["Unsupervised", "Supervised"], c: 0},
+ cards: [
+  {t: "ML Categorization", s: "Cat-e-go-ri-za-tion", a: "على أي أساس نصنّف الخوارزميات؟", p: "🪜 أعلى الدرج – يمين أو يسار",
+   i: "نختار الطريقة حسب أمرين: <b>توفر بيانات التدريب</b> + <b>النتيجة المرغوبة</b>.",
+   e: "Depending on the availability of training data and the desired outcome of the learning algorithms, machine-learning algorithms are categorized into supervised learning and unsupervised learning.",
+   ea: "حسب توفر بيانات التدريب والنتيجة المرغوبة، تُصنّف الخوارزميات إلى خاضعة وغير خاضعة للإشراف.", k: ["Availability", "التوفر"]},
+  {t: "Supervised (Formal)", s: "Su-per-vised", a: "الخاضع للإشراف – تفصيلي", p: "🍳 المطبخ – طلب وطبق",
+   i: "نعطي <b>أزواجًا</b>: مدخل + مخرجه الصحيح، فيتعلم بأقل تكلفة.<br>تصنيفاته الشائعة: <b>ANN، SVM، Decision trees</b>.",
+   e: "In supervised learning, pairs of input and target output are given to train a function, and a learning model is trained such that the output of the function can be predicted at a minimum cost.",
+   ea: "تُعطى أزواج من المدخلات والمخرجات المستهدفة لتدريب دالة يمكن التنبؤ بمخرجها بأقل تكلفة.", k: ["Pairs", "أزواج"]},
+  {t: "Random Forest", s: "Ran-dom For-est", a: "الغابة العشوائية", p: "🌳 الحديقة – صف أشجار يصد السيل",
+   i: "مجموعة أشجار قرار معًا، دقة عالية، ممتازة ضد <b>DDoS</b> (سيل الطلبات).",
+   e: "Random Forest: an ensemble of decision trees that provides high accuracy, particularly effective for detecting DDoS attacks.",
+   ea: "مجموعة من أشجار القرار بدقة عالية، فعالة خصوصًا في كشف DDoS.", k: ["DDoS", "حجب الخدمة"]},
+  {t: "CNN", s: "C-N-N", a: "الشبكات الالتفافية", p: "📺 شاشة التلفاز",
+   i: "ترى تسلسل حزم الشبكة <b>كأنه صورة</b> وتبحث فيها عن شكل الهجوم.",
+   e: "Convolutional Neural Networks (CNN): used to analyze network packet sequences as if they were images, to spot attack patterns.",
+   ea: "تحلل تسلسلات حزم الشبكة كأنها صور لرصد أنماط الهجوم.", k: ["As images", "كصور"]},
+  {t: "Transformer (BERT)", s: "Trans-form-er", a: "المحوّلات", p: "📚 المكتبة – قارئ نهم",
+   i: "يقرأ <b>السجلات</b> (logs) والأوصاف النصية للثغرات.",
+   e: "Transformer-based models (like BERT): used for log analysis and threat detection by analyzing textual descriptions of vulnerabilities.",
+   ea: "تُستخدم لتحليل السجلات وكشف التهديدات بتحليل الأوصاف النصية للثغرات.", k: ["Logs", "سجلات"]},
+  {t: "Unsupervised (Formal)", s: "Un-su-per-vised", a: "غير الخاضع – تفصيلي", p: "🧺 الغسيل – بلا ملصقات",
+   i: "بلا هدف أو ملصق؛ يلخّص خصائص البيانات ويكوّن <b>مجموعات طبيعية</b> وفق دالة تكلفة.<br>أشهر طرقه: <b>k-means، Hierarchical، SOM</b>.",
+   e: "In unsupervised learning, no target or label is given in sample data… The most famous unsupervised learning methods include k-means clustering, hierarchical clustering, and self-organization map.",
+   ea: "لا هدف ولا ملصق؛ أشهر طرقه k-means والتجميع الهرمي وخريطة التنظيم الذاتي.", k: ["Natural clusters", "مجموعات طبيعية"]},
+  {t: "Autoencoders", s: "Au-to-en-co-ders", a: "المرمّزات التلقائية", p: "🧳 كيس تفريغ الهواء",
+   i: "تتعلم ضغط البيانات <b>الطبيعية</b>. الشاذ يُعاد بناؤه <b>بجودة ضعيفة</b>، فنعرف أنه شاذ.",
+   e: "Autoencoders: deep neural networks capable of learning a compressed representation of normal data. The reconstruction of abnormal data is usually of poor quality, which makes it possible to identify them as anomalies.",
+   ea: "شبكات عميقة تتعلم تمثيلًا مضغوطًا للطبيعي؛ إعادة بناء الشاذ ضعيفة فيُكشف.", k: ["Reconstruction", "إعادة بناء"]},
+  {t: "Isolation Forest", s: "I-so-la-tion For-est", a: "غابة العزل", p: "🌳 الحديقة – شجرة غريبة تُقص بسرعة",
+   i: "<b>تعزل</b> النقاط غير النمطية بسرعة، مثالية للوقت الفعلي.",
+   e: "Isolation Forest: an algorithm that quickly \"isolates\" atypical data points, making it ideal for real-time anomaly detection in network traffic flows.",
+   ea: "تعزل النقاط غير النمطية بسرعة، مثالية لكشف الشذوذ في الوقت الفعلي.", k: ["Isolates", "يعزل"]}
+ ],
+ why: {q: "لماذا Autoencoder وIsolation Forest تحت Unsupervised؟", a: "لأن كليهما لا يحتاج ملصقات هجوم: الأول يتعلم شكل الطبيعي فقط، والثاني يعزل الغريب. وكلاهما <b>لكشف الشذوذ</b>."},
+ teach: ["الأساس: توفر بيانات التدريب + النتيجة المرغوبة", "Supervised: Pairs؛ ANN, SVM, DT؛ حديث: RF (DDoS)، CNN (كصور)، BERT (Logs)", "Unsupervised: k-means, Hierarchical, SOM؛ حديث: Autoencoders, Isolation Forest"],
+ quiz: [
+  {q: "Which algorithm is particularly effective for detecting DDoS attacks?", qa: "أي خوارزمية فعالة خصوصًا ضد DDoS؟", o: ["Random Forest", "Isolation Forest", "k-means", "BERT"], c: 0, w: "Forest = صف أشجار يصد السيل."},
+  {q: "Log analysis and textual descriptions of vulnerabilities are handled by:", qa: "تحليل السجلات والأوصاف النصية للثغرات:", o: ["Transformer-based models (BERT)", "CNN", "Random Forest", "Autoencoders"], c: 0, w: "Logs = BERT."},
+  {q: "Analyzing network packet sequences as if they were images is done by:", qa: "تحليل حزم الشبكة كأنها صور:", o: ["CNN", "BERT", "SOM", "Decision trees"], c: 0, w: "As images = CNN."},
+  {q: "Self-organization map is a supervised learning method.", qa: "خريطة التنظيم الذاتي طريقة خاضعة للإشراف.", o: TF, c: 1, w: "SOM من أشهر طرق <b>Unsupervised</b>."},
+  {q: "Autoencoders reconstruct abnormal data with high quality.", qa: "المرمزات التلقائية تعيد بناء البيانات الشاذة بجودة عالية.", o: TF, c: 1, w: "العكس: poor quality، ولهذا تُكشف."},
+  {q: "An algorithm that quickly isolates atypical data points is:", qa: "خوارزمية تعزل النقاط غير النمطية بسرعة:", o: ["Isolation Forest", "Random Forest", "CNN", "SVM"], c: 0, w: "Isolates = Isolation Forest."},
+  {q: "\"Pairs of input and target output are given to train a function\" describes:", qa: "أزواج من المدخلات والمخرجات المستهدفة لتدريب دالة:", o: ["Supervised learning", "Unsupervised learning", "Reinforcement learning"], c: 0, w: "Pairs = Supervised."}
+ ]},
+
+L7: { ch: "ch1", n: 7, title: "الأمن: التقليدي، التكيفي، وKerberos", en: "Conventional vs Adaptive & Kerberos",
+ hook: "الآن نضع كل ما سبق في خدمة الحماية. السؤال المحوري: لماذا لا يكفي <b>القفل القديم</b>؟ لأنه يعرف المفاتيح المسجلة فقط.",
+ guess: {q: "Signature-based security fails mostly against…", qa: "الأمن المبني على التوقيعات يفشل غالبًا أمام…", o: ["zero-day threats", "known viruses", "spam"], c: 0},
+ cards: [
+  {t: "Cybersecurity", s: "Cy-ber-se-cu-ri-ty", a: "الأمن السيبراني", p: "🧱 سور المنزل",
+   i: "يحمي: <b>CS MEND</b> = Computers, Servers, Mobile devices, Electronic systems, Networks, Data. ويسمى أيضًا IT security.",
+   e: "Cybersecurity is the practice of defending computers, servers, mobile devices, electronic systems, networks, and data from malicious attacks. It's also known as information technology security or electronic information security.",
+   ea: "ممارسة الدفاع عن الحواسيب والخوادم والأجهزة والأنظمة والشبكات والبيانات من الهجمات، ويُعرف بأمن تقنية المعلومات.", k: ["Defending", "الدفاع"]},
+  {t: "Conventional Cybersecurity System", s: "Net-work + Host", a: "النظام التقليدي (المخطط)", p: "🏘️ بوابة الحي ثم باب البيت",
+   i: "التهديدات (virus, trojan, worm, botnet, spam) تمر أولًا بـ<b>دفاع الشبكة</b>: Firewall, Spam filter, Antivirus, Network IDS. ثم <b>دفاع المضيف</b>: Firewall, Antivirus, Host IDS.",
+   e: "Network defense system: Firewall, Spam filter, Antivirus, Network intrusion detection. Host defense system: Firewall, Antivirus, Host intrusion detection.",
+   ea: "دفاع الشبكة: جدار ناري، فلتر سبام، مضاد فيروسات، كشف تسلل شبكي. دفاع المضيف: جدار ناري، مضاد فيروسات، كشف تسلل المضيف.", k: ["Network + Host", "شبكة + مضيف"]},
+  {t: "Conventional Security", s: "Con-ven-tion-al", a: "الأمن التقليدي", p: "🔑 قفل الباب القديم",
+   i: "<b>ثابت</b> ومبني على <b>التوقيعات</b>. قوي ضد المعروف، و<b>ضعيف أمام zero-day</b> (لا توقيع لها بعد).",
+   e: "Static and signature-based approach. Effective against known threats. Uses signature lists, predefined access rules, and firewalls to block known malicious traffic. Weakness: Ineffective against new (zero-day) threats that do not yet have a signature.",
+   ea: "نهج ثابت مبني على التوقيعات، فعال ضد المعروف، ضعيف أمام تهديدات يوم الصفر.", k: ["Static", "ثابت"]},
+  {t: "Adaptive Defense Systems", s: "A-dap-tive De-fense", a: "الأنظمة التكيفية", p: "🐕 كلب الحراسة",
+   i: "<b>ديناميكي</b> ومبني على <b>السلوك</b>، يستخدم ML وAI، ويكشف المجهول بملاحظة الانحراف عن الطبيعي.",
+   e: "Dynamic and behavior-based approach. Designed to learn and adapt to evolving threats. Uses machine learning and AI to analyze the behavior of systems, users, and networks. Strength: Capable of detecting anomalies and unknown threats by identifying deviations from normal behavior.",
+   ea: "نهج ديناميكي مبني على السلوك، يتعلم ويتكيف، ويكشف الشذوذ والتهديدات المجهولة.", k: ["Dynamic", "ديناميكي"]},
+  {t: "Conventional Defense + MFA", s: "M-F-A", a: "الأدوات التقليدية ما زالت مستخدمة", p: "🛡️ غرفة الحارس – عدة أقفال",
+   i: "جدران الحماية وأدوات المصادقة وKerberos المدمج في Windows <b>ما زالت تُستخدم</b>، لكنها طبقة واحدة من طبقات، ويُعزَّز Kerberos بـ<b>MFA</b>.",
+   e: "In modern environments, these conventional defense tools are still used, but they are only one of many layers of protection… The Kerberos system remains a fundamental component for authentication in an enterprise domain, but it is strengthened by techniques like Multi-Factor Authentication (MFA).",
+   ea: "الأدوات التقليدية ما زالت مستخدمة كطبقة من طبقات، وKerberos يُعزَّز بالمصادقة متعددة العوامل.", k: ["Still used", "ما زالت"]},
+  {t: "Kerberos (8 steps)", s: "Ker-ber-os", a: "مصادقة كيربروس", p: "🎫 مجلس الضيوف – تذكرة الدخول",
+   i: "بدل إرسال كلمة السر كل مرة، نستخدم <b>تذكرة مؤقتة</b>. الخطوات: <b>DiDi – Anna – TiTi – AhAh</b><br>1 DNS Query (أين؟) · 2 DNS Response (العنوان) · 3 Anonymous Connect (أنا جون) · 4 Negotiate (Kerberos أو NTLM) · 5 TGS Request (يطلب تذكرة من AD) · 6 TGS Response (AD يصدر التذكرة) · 7 AP Request (يرسل التذكرة) · 8 AP Response (نجاح/فشل)",
+   e: "A network authentication protocol that allows two entities to prove their identity to each other over an insecure network. In this process, a temporary \"Ticket\" is used to grant access to a resource without having to send the user's password repeatedly.",
+   ea: "بروتوكول يتيح لكيانين إثبات هويتهما عبر شبكة غير آمنة، بتذكرة مؤقتة بدل إرسال كلمة السر مرارًا.", k: ["Ticket", "تذكرة"]},
+  {t: "TGS Response ⭐", s: "T-G-S Re-sponse", a: "جواب سؤال الواجب", p: "🎫 الحارس يسلّم التذكرة",
+   i: "<b>⭐ سؤال الواجب:</b> TGS Response هي الخطوة السادسة: وحدة التحكم الأمنية (Active Directory) تتحقق من هوية العميل وتصدر له تذكرة وصول آمنة.",
+   e: "Step6: TGS Response with Ticket. The security controller issues the ticket. The controller verifies the client's identity and gives them a special, secure \"access ticket.\"",
+   ea: "وحدة التحكم الأمنية تُصدر التذكرة بعد التحقق من هوية العميل وتعطيه تذكرة وصول آمنة.", k: ["Issues ticket", "يُصدر التذكرة"]}
+ ],
+ why: {q: "لماذا يفشل الأمن التقليدي أمام zero-day بينما ينجح التكيفي؟", a: "التقليدي يقارن بقائمة توقيعات، والهجوم الجديد ليس له توقيع بعد. التكيفي لا يسأل «هل أعرفه؟» بل «هل هذا السلوك طبيعي؟»، فيكشف الانحراف حتى لو كان المهاجم جديدًا."},
+ teach: ["CS MEND + اسمه الآخر IT security", "النظام التقليدي: الشبكة ثم المضيف (Spam filter في الشبكة فقط)", "Conventional = Static/Signature، يفشل مع zero-day", "Adaptive = Dynamic/Behavior، يكشف المجهول", "Kerberos: تذكرة بدل كلمة السر، 8 خطوات، والسادسة TGS Response"],
+ quiz: [
+  {q: "Cybersecurity is also known as information technology security.", qa: "يُعرف الأمن السيبراني أيضًا بأمن تقنية المعلومات.", o: TF, c: 0, w: "or electronic information security."},
+  {q: "A static and signature-based approach describes:", qa: "نهج ثابت مبني على التوقيعات:", o: ["Conventional security", "Adaptive defense systems", "Anomaly detection", "Reinforcement learning"], c: 0, w: "Static = Conventional."},
+  {q: "Conventional security is effective against zero-day threats.", qa: "الأمن التقليدي فعال ضد تهديدات يوم الصفر.", o: TF, c: 1, w: "هذه نقطة ضعفه: ineffective against zero-day."},
+  {q: "In the conventional cybersecurity system, the spam filter belongs to:", qa: "في النظام التقليدي، فلتر السبام يقع في:", o: ["Network defense system", "Host defense system", "Analysis engine"], c: 0, w: "Spam filter موجود في دفاع الشبكة فقط."},
+  {q: "Kerberos sends the user's password repeatedly to access each resource.", qa: "Kerberos يرسل كلمة مرور المستخدم بشكل متكرر.", o: TF, c: 1, w: "يستخدم Ticket مؤقتة <b>without</b> sending the password repeatedly."},
+  {q: "In Kerberos, the TGS Response is when:", qa: "في Kerberos، خطوة TGS Response هي عندما:", o: ["the security controller verifies the client's identity and issues a secure access ticket", "the client asks DNS for the server address", "the server says Welcome", "the client sends the ticket to the server"], c: 0, w: "⭐ جواب الواجب: الخطوة 6."},
+  {q: "In step 4, the server accepts two methods:", qa: "في الخطوة 4 يقبل الخادم طريقتين:", o: ["Kerberos or NTLM", "MFA or 2FA", "DNS or HTTP", "SVM or CNN"], c: 0, w: "Negotiate (Kerberos, NTLM)."},
+  {q: "Conventional defense tools are no longer used in modern environments.", qa: "أدوات الدفاع التقليدية لم تعد مستخدمة.", o: TF, c: 1, w: "still used, only one of many layers."}
+ ]},
+
+L8: { ch: "ch1", n: 8, title: "نظام الدفاع التكيفي (6 مكونات)", en: "Adaptive Defense System",
+ hook: "هنا يعيش تعلم الآلة داخل الأمن: <b>محرك التحليل = نموذج ML</b>. تخيّل غرفة مراقبة من ست محطات، ورتّبها بجملة: <b>I Do Prefer Fresh Apple Drinks</b>.",
+ guess: {q: "The \"brain\" of the adaptive defense system is the…", qa: "«دماغ» نظام الدفاع التكيفي هو…", o: ["analysis engine", "firewall", "data capturing tool"], c: 0},
+ cards: [
+  {t: "Not enough", s: "Meth-od-ol-o-gies", a: "لماذا نحتاج دفاعًا أعلى؟", p: "🧱 السور – لصوص يطوّرون حيلهم",
+   i: "الدفاع ضد الهجمات <b>المكتشفة فقط لا يكفي</b>. والمهاجمون يستخدمون AI، فيجب التحول من <b>Reactive</b> (توقيعات) إلى <b>Proactive & Predictive</b>.",
+   e: "Because of the constantly evolving cyber threats, building defense systems for discovered attacks is not enough to protect users… defense systems must shift from a reactive (signature-based) approach to a proactive and predictive one.",
+   ea: "بناء دفاع للهجمات المكتشفة لا يكفي؛ يجب التحول من التفاعلي إلى الاستباقي والتنبؤي.", k: ["Not enough", "لا يكفي"]},
+  {t: "Adaptive Defense System", s: "I-D-P-F-A-D", a: "النظام ومكوناته الستة", p: "🖥️ غرفة المراقبة – 6 محطات",
+   i: "1 Information sources (الغرف) · 2 Data capturing tools (الكاميرات) · 3 Data preprocessing (تنظيف التسجيل) · 4 Feature extraction (قص اللقطة المهمة) · 5 Analysis engines (العقل) · 6 Decision of responses (قفل الأبواب). يتعلم <b>باستمرار</b>.",
+   e: "This diagram represents an adaptive and intelligent defense architecture. Unlike static systems, this model continuously learns and adapts… The workflow goes from collecting raw data to automating responses.",
+   ea: "بنية دفاع تكيفية ذكية تتعلم باستمرار، من جمع البيانات الخام إلى أتمتة الاستجابة.", k: ["Continuously learns", "يتعلم باستمرار"]},
+  {t: "Data Capturing Tools", s: "Cap-tur-ing", a: "أدوات الالتقاط", p: "🎥 الكاميرات",
+   i: "<b>Lin-Lib، Win-Win، Sun-Sol</b>: Libpcap لـLinux، Winpcap لـWindows، Solaris BSM لـSUN. والحديثة: EDR، سجلات السحابة، SQL، واجهات استخبارات التهديد.",
+   e: "Data-capturing tools, such as Libpcap for Linux, Solaris BSM for SUN, and Winpcap for Windows, capture events from the audit trails of resource information sources.",
+   ea: "أدوات مثل Libpcap وSolaris BSM وWinpcap تلتقط الأحداث من سجلات التدقيق.", k: ["Libpcap", "التقاط"]},
+  {t: "Data Preprocessing", s: "Pre-pro-cess-ing", a: "المعالجة المسبقة", p: "🧹 تنظيف التسجيلات",
+   i: "تستبعد الهجمات التي لها توقيعات جيدة، وتنظف: قيم شاذة، <b>قيم مفقودة</b>، تطبيع الخصائص.",
+   e: "This module filters out the attacks for which good signatures have been learned… It involves data cleaning, handling outliers, managing missing values, and normalizing features.",
+   ea: "تستبعد الهجمات ذات التوقيعات الجيدة، وتشمل التنظيف ومعالجة الشواذ والقيم المفقودة والتطبيع.", k: ["Missing values", "قيم مفقودة"]},
+  {t: "Feature Extraction", s: "Fea-ture Ex-trac-tion", a: "استخراج الخصائص", p: "✂️ قص اللقطة المهمة",
+   i: "من؟ من أين؟ إلى أين؟ متى؟ كم؟ = System calls، Start time، Duration، <b>Source/Destination IP & Port</b>، Protocol، Bytes، Packets.",
+   e: "Derives basic features that are useful in event analysis engines, including a sequence of system calls, start time, duration of a network flow, source IP and source port, destination IP and destination port, protocol, number of bytes, and number of packets.",
+   ea: "يستخلص خصائص مثل استدعاءات النظام ووقت البدء والمدة وعناوين ومنافذ المصدر والوجهة والبروتوكول وعدد البايتات والحزم.", k: ["IP + Port", "عنوان + منفذ"]},
+  {t: "Analysis Engine", s: "A-nal-y-sis En-gine", a: "محرك التحليل", p: "🧠 العقل",
+   i: "<b>دماغ</b> الكشف: نماذج ML تكشف الشذوذ أو التوقيعات، وهو جوهر قدرة النظام على التكيف.",
+   e: "The analysis engine is the \"brain\" of the detection. It leverages machine learning models to identify anomalies (unusual behaviors) or signatures (known attack patterns)… Analysis engines are the core technologies for the generation of the adaptation ability of the cyber defense system.",
+   ea: "محرك التحليل هو دماغ الكشف، يستخدم نماذج ML لتحديد الشذوذ أو التوقيعات، وهو جوهر قدرة التكيف.", k: ["Brain", "الدماغ"]},
+  {t: "Decision of Responses", s: "De-ci-sion", a: "قرار الاستجابة", p: "🔒 قفل الأبواب تلقائيًا",
+   i: "بعد الكشف: <b>عزل</b> الجهاز المصاب أو حجب IP الخبيث تلقائيًا.",
+   e: "Deployed once a cyber attack is identified… the system can automatically isolate the infected device from the network or block the malicious IP address.",
+   ea: "يُفعَّل بعد تحديد الهجوم؛ يعزل الجهاز المصاب أو يحجب العنوان الخبيث تلقائيًا.", k: ["Isolate", "عزل"]}
+ ],
+ why: {q: "ما علاقة هذا الدرس بالدرس الثاني (أنواع التعلم)؟", a: "محرك التحليل هو حيث تعمل أنواع التعلم: يكشف <b>التوقيعات</b> (فكرة Supervised: أنماط معروفة) أو <b>الشذوذ</b> (فكرة Unsupervised: انحراف عن الطبيعي). وما قبله من خطوات يشبه KDD: التقاط ثم تنظيف ثم خصائص."},
+ teach: ["الدفاع عن المكتشف لا يكفي، والتحول نحو proactive & predictive", "الترتيب: I Do Prefer Fresh Apple Drinks", "Libpcap/Linux، Winpcap/Windows، Solaris BSM/SUN", "Analysis engine = Brain", "Decision = عزل الجهاز أو حجب IP"],
+ quiz: [
+  {q: "Libpcap is a data capturing tool for:", qa: "Libpcap أداة التقاط لنظام:", o: ["Linux", "Windows", "SUN", "Android"], c: 0, w: "Lin-Lib."},
+  {q: "The \"brain\" of the detection is the:", qa: "دماغ الكشف هو:", o: ["Analysis engine", "Data preprocessing", "Feature extraction", "Firewall"], c: 0, w: "Analysis engine = Brain."},
+  {q: "Source IP, destination port, protocol, and number of bytes are derived in:", qa: "عناوين ومنافذ وبروتوكول وعدد بايتات تُستخلص في:", o: ["Feature extraction", "Data capturing", "Decision of responses", "Data preprocessing"], c: 0, w: "IP + Port = Feature extraction."},
+  {q: "Automatically isolating the infected device or blocking the malicious IP address is:", qa: "عزل الجهاز المصاب أو حجب IP تلقائيًا:", o: ["Decision of responses", "Analysis engine", "Feature extraction"], c: 0, w: "Isolate = Decision of responses."},
+  {q: "Building defense systems for discovered attacks is enough to protect users.", qa: "بناء دفاع للهجمات المكتشفة يكفي لحماية المستخدمين.", o: TF, c: 1, w: "is <b>not</b> enough."},
+  {q: "Defense systems must shift from a proactive approach to a reactive one.", qa: "يجب أن تتحول الأنظمة من الاستباقي إلى التفاعلي.", o: TF, c: 1, w: "العكس: من reactive إلى proactive and predictive."},
+  {q: "Handling outliers, managing missing values, and normalizing features happen in:", qa: "معالجة الشواذ والقيم المفقودة والتطبيع في:", o: ["Data preprocessing", "Feature extraction", "Information sources"], c: 0, w: "Missing values = Preprocessing."}
+ ]},
+
+L9: { ch: "ch1", n: 9, title: "الحلول: الاستباقي والتفاعلي ووحدات IDS", en: "Proactive, Reactive & IDS Modules",
+ hook: "هنا يلتقي الفصل كله: <b>كشف التوقيع</b> يشبه Supervised (يعرف المسمّى، وأمثلته DT وRF وSVM)، و<b>كشف الشذوذ</b> يشبه Unsupervised (يتعلم الطبيعي، وأمثلته K-Means وAutoencoders وIsolation Forest). الوحدات الخمس بالترتيب: <b>My Aunt Hates Spicy Pizza</b>.",
+ guess: {q: "Which detection can catch previously unknown attacks?", qa: "أي كشف يلتقط هجمات غير معروفة سابقًا؟", o: ["Anomaly detection", "Signature detection"], c: 0},
+ cards: [
+  {t: "Proactive", s: "Pro-ac-tive", a: "الاستباقي", p: "🧯 صيانة الكهرباء قبل الحريق",
+   i: "<b>يتوقع ويزيل</b> الثغرات قبل الهجوم. يحتاج <b>API</b>: Authentication، تجنب Programming errors، Information protection. والحديث <b>TRV</b>: Threat intelligence، Risk analysis، Vulnerability management.",
+   e: "Proactive approaches anticipate and eliminate vulnerabilities in the cyber system, while remaining prepared to defend effectively and rapidly against attacks.",
+   ea: "الأساليب الاستباقية تتوقع الثغرات وتزيلها مع البقاء مستعدة للدفاع بسرعة.", k: ["Anticipate", "يتوقع"]},
+  {t: "Reactive (IDS)", s: "Re-ac-tive", a: "التفاعلي", p: "🚨 جهاز إنذار الحريق",
+   i: "<b>خط الدفاع الثاني</b> = أنظمة كشف التسلل IDS، تقرأ log files وnetwork flow لتحديد الضرر وتتبع المخترق ومنع التكرار.",
+   e: "The second line of cyber defense is composed of reactive security solutions, such as intrusion detection systems (IDSs). IDSs detect intrusions based on the information from log files and network flow.",
+   ea: "خط الدفاع الثاني حلول تفاعلية مثل IDS، تكشف التسلل من ملفات السجل وتدفق الشبكة.", k: ["Second line", "الخط الثاني"]},
+  {t: "Misuse / Signature", s: "Sig-na-ture", a: "كشف التوقيع", p: "📸 لوحة صور المطلوبين",
+   i: "يقارن الحدث بتوقيعات <b>معروفة</b>: فوري وإيجابيات كاذبة <b>أقل</b>، لكنه <b>لا يكشف الجديد</b>.<br>أمثلة: Decision Trees, Random Forest, SVMs, Deep Neural Networks.",
+   e: "Misuse detection, also called signature detection, is an IDS triggering method that generates alarms when a known cyber misuse occurs… known attacks can be detected immediately and realizably with a lower false-positive rate. However, signature detection cannot detect novel attacks.",
+   ea: "ينبّه عند إساءة معروفة؛ يكشف المعروف فورًا بإيجابيات كاذبة أقل، لكنه لا يكشف الهجمات الجديدة.", k: ["Known", "معروف"]},
+  {t: "Anomaly", s: "A-nom-a-ly", a: "كشف الشذوذ", p: "👵 الجدة التي تحفظ روتين البيت",
+   i: "خطوتان: <b>Training</b> (ملف للطبيعي بلا هجوم) ثم <b>Detection</b> (انحراف كبير = هجوم). يكشف <b>المجهول</b>، لكن <b>إنذاراته الكاذبة كثيرة</b>، والخصائص السيئة تضره، ويمكن تسميم تدريبه.<br>أمثلة: K-Means, Autoencoders, Isolation Forest.",
+   e: "Anomaly detection triggers alarms when the detected object behaves significantly differently from the predefined normal patterns… Anomaly detection can detect previously unknown attacks. However, anomaly detection is hampered by a high rate of false alarms.",
+   ea: "ينبّه عندما يختلف السلوك كثيرًا عن الطبيعي؛ يكشف المجهول لكن إنذاراته الكاذبة مرتفعة.", k: ["Deviate", "ينحرف"]},
+  {t: "Hybrid", s: "Hy-brid", a: "الهجين", p: "👮 الحارس + الجدة معًا",
+   i: "<b>يجمع</b> الاثنين ليعالج عيب كل منهما: التوقيع لا يعرف الجديد، والشذوذ كثير الإنذارات.<br>أمثلة: RF + XGBoost، K-Means + SVM، CNN + Bi-LSTM.",
+   e: "Researchers have proposed hybrid detection techniques to combine anomaly and misuse detection techniques in IDSs.",
+   ea: "اقترح الباحثون تقنيات هجينة تجمع كشف الشذوذ وكشف إساءة الاستخدام.", k: ["Combine", "يجمع"]},
+  {t: "Scan", s: "Scan", a: "كشف المسح", p: "🪟 لص يتفقد النوافذ",
+   i: "ينبّه عندما يمسح المهاجم الخدمات <b>قبل</b> الهجوم = <b>تمهيد</b> (precursor).",
+   e: "Scan detection generates alerts when attackers scan services or computer components in network systems before launching attacks. A scan detector identifies the precursor of an attack.",
+   ea: "ينبّه عندما يمسح المهاجمون الخدمات قبل شن الهجوم؛ يحدد تمهيد الهجوم.", k: ["Precursor", "تمهيد"]},
+  {t: "Profiling + UEBA", s: "Pro-fil-ing · U-E-B-A", a: "التنميط", p: "📒 دفتر عادات أهل البيت",
+   i: "يجمّع الاتصالات المتشابهة ويبحث عن السلوك <b>السائد</b>، ثم يحدد الشواذ. تطوّر إلى <b>UEBA</b>: ملف لكل مستخدم وجهاز وتطبيق، بـ<b>Unsupervised learning</b> والإحصاء.",
+   e: "Profiling modules perform clustering algorithms or other data-mining and machine learning methods to group similar network connections and search for dominant behaviors… UEBA systems use unsupervised learning and statistics to create a profile of normal behavior for each user, device, or application.",
+   ea: "تجمّع الاتصالات المتشابهة وتبحث عن السلوك السائد؛ وUEBA تنشئ ملفًا طبيعيًا لكل مستخدم وجهاز وتطبيق.", k: ["Dominant", "سائد"]}
+ ],
+ why: {q: "لماذا التوقيع إيجابياته الكاذبة قليلة، والشذوذ إنذاراته الكاذبة كثيرة؟", a: "التوقيع لا ينبّه إلا عند تطابق مع هجوم <b>معروف</b>، فنادرًا ما يخطئ. الشذوذ ينبّه لأي شيء <b>غير معتاد</b>، وليس كل غير معتاد هجومًا (موظف سهر يعمل)، فتكثر الإنذارات الكاذبة. ولهذا جاء <b>الهجين</b>."},
+ teach: ["Proactive: يتوقع، API وTRV؛ Reactive: الخط الثاني IDS", "My Aunt Hates Spicy Pizza", "Signature: معروف، FP أقل، لا يكشف الجديد", "Anomaly: يكشف المجهول، إنذارات كثيرة", "Hybrid يجمع، Scan قبل الهجوم، Profiling سائد وUEBA"],
+ quiz: [
+  {q: "IDSs are proactive security solutions.", qa: "أنظمة IDS حلول استباقية.", o: TF, c: 1, w: "IDS = reactive (the second line of defense)."},
+  {q: "Approaches that anticipate and eliminate vulnerabilities are:", qa: "الأساليب التي تتوقع الثغرات وتزيلها:", o: ["Proactive", "Reactive", "Signature detection", "Scan detection"], c: 0, w: "Anticipate = Proactive."},
+  {q: "Signature detection can detect novel attacks.", qa: "كشف التوقيع يستطيع كشف الهجمات الجديدة.", o: TF, c: 1, w: "cannot detect novel attacks."},
+  {q: "Signature detection detects known attacks with a lower false-positive rate.", qa: "كشف التوقيع يكشف المعروف بإيجابيات كاذبة أقل.", o: TF, c: 0, w: "نقطة قوته."},
+  {q: "Anomaly detection has a low rate of false alarms.", qa: "كشف الشذوذ إنذاراته الكاذبة قليلة.", o: TF, c: 1, w: "high rate of false alarms."},
+  {q: "Combining anomaly and misuse detection is called:", qa: "الجمع بين كشف الشذوذ والتوقيع:", o: ["Hybrid detection", "Profiling", "Scan detection", "UEBA"], c: 0, w: "Combine = Hybrid."},
+  {q: "Alerts generated when attackers scan services before launching attacks come from:", qa: "تنبيهات عند مسح الخدمات قبل الهجوم:", o: ["Scan detection", "Anomaly detection", "Profiling modules"], c: 0, w: "Precursor = Scan."},
+  {q: "UEBA systems use ______ to create a profile of normal behavior for each user.", qa: "تستخدم UEBA ____ لإنشاء ملف طبيعي لكل مستخدم.", o: ["unsupervised learning and statistics", "supervised learning only", "signature lists", "reinforcement rewards"], c: 0, w: "unsupervised learning and statistics."},
+  {q: "Which is crucial for zero-day attacks?", qa: "أيها حاسم لهجمات يوم الصفر؟", o: ["Anomaly detection", "Signature detection", "Data selection"], c: 0, w: "ملخص الفصل: Anomaly crucial for zero-day."}
+ ]},
+
+// ------------------------------------------------------------------ CH2
+L10: { ch: "ch2", n: 10, title: "أين يقع ML؟ وما تعريفاته؟", en: "AI ⊃ ML ⊃ DL & Definitions",
+ hook: "الفصل الثاني يكبّر العدسة على «الآلة التي تتعلم». ابدأ بالخريطة: <b>دمية روسية</b> كبيرة AI، داخلها ML، وداخلها DL.",
+ guess: {q: "In machine learning, the computer receives data and output, and produces…", qa: "في تعلم الآلة يتلقى الحاسوب البيانات والمخرجات وينتج…", o: ["a program", "an output", "a password"], c: 0},
+ cards: [
+  {t: "AI ⊃ ML ⊃ DL", s: "AI · ML · DL", a: "الدمية الروسية", p: "🪆 رف الصالة",
+   i: "AI أكبر دائرة (1950s)، داخلها ML (1980s)، وداخلها DL (2010s).<br>ML يعطي AI <b>القدرة على التعلم</b>. DL فرع من ML <b>يحاكي دماغ الإنسان</b>.",
+   e: "It is machine learning that gives AI the ability to learn… Deep learning, which is a subcategory of machine learning, provides AI with the ability to mimic a human brain's neural network.",
+   ea: "تعلم الآلة يمنح AI القدرة على التعلم، والتعلم العميق فرع منه يحاكي الشبكة العصبية لدماغ الإنسان.", k: ["Subcategory", "فرع"]},
+  {t: "Traditional Programming vs ML", s: "Pro-gram-ming", a: "البرمجة مقابل تعلم الآلة", p: "🍰 الوصفة والكعكة",
+   i: "التقليدي: Data + <b>Program</b> = Output (الوصفة تعطي الكعكة).<br>ML: Data + <b>Output</b> = Program (الكعكة تعطي الوصفة).",
+   e: "Traditional Programming: Data, Program → Computer → Output. Machine Learning: Data, Output → Computer → Program.",
+   ea: "التقليدي: بيانات وبرنامج تعطي مخرجات. تعلم الآلة: بيانات ومخرجات تعطي برنامجًا.", k: ["Program", "البرنامج"]},
+  {t: "&lt;P, T, E&gt;", s: "P-T-E", a: "مهمة تعلم محددة", p: "📖 غرفة المذاكرة – «بيتي»",
+   i: "يتحسن <b>أداؤه P</b> في <b>مهمة T</b> بـ<b>الخبرة E</b>.<br>مثال البريد: T = تصنيف الرسائل spam/legitimate، P = نسبة الصحيح، E = قاعدة رسائل بعضها مسمّى.",
+   e: "Study of algorithms that improve their performance P at some task T with experience E. well-defined learning task: &lt;P,T,E&gt;",
+   ea: "دراسة خوارزميات تحسّن أداءها P في مهمة T مع الخبرة E.", k: ["P-T-E", "أداء · مهمة · خبرة"]},
+  {t: "Arthur Samuel & Herbert Simon", s: "Sam-u-el · Si-mon", a: "تعريفان مشهوران", p: "🖼️ برواز على جدار غرفة المذاكرة",
+   i: "<b>Samuel (1959)</b>: «بدون برمجة <b>صريحة</b>».<br><b>Simon</b>: «Simon says: <b>experience</b>»، أي عملية يتحسن فيها الأداء من الخبرة.",
+   e: "\"A field of study that gives computers the ability to learn without being explicitly programmed\" (Arthur Samuel, 1959). \"Learning is any process by which a system improves performance from experience\" (Herbert Simon).",
+   ea: "صموئيل: قدرة الحواسيب على التعلم دون برمجة صريحة. سايمون: التعلم أي عملية يحسّن بها النظام أداءه من الخبرة.", k: ["Explicitly", "صراحةً"]}
+ ],
+ why: {q: "لماذا نحتاج ML بدل أن نكتب برنامجًا عاديًا لكشف الهجمات؟", a: "لأننا لا نعرف قواعد كل هجوم لنكتبها. نعطي الحاسوب <b>أمثلة وأجوبتها</b> فيستنتج هو «البرنامج» (القواعد)، ويتحسن كلما زادت الخبرة E."},
+ teach: ["AI أكبر، ثم ML، ثم DL", "التقليدي يُخرج Output، وML يُخرج Program", "P-T-E ومثال البريد", "Samuel = explicitly، Simon = experience"],
+ quiz: [
+  {q: "Deep learning is a subcategory of machine learning.", qa: "التعلم العميق فرع من تعلم الآلة.", o: TF, c: 0, w: "AI ⊃ ML ⊃ DL."},
+  {q: "In machine learning, the computer is given:", qa: "في تعلم الآلة يُعطى الحاسوب:", o: ["Data and Output, and produces a Program", "Data and Program, and produces Output", "Only a Program", "Only Output"], c: 0, w: "ML = الكعكة تعطي الوصفة."},
+  {q: "\"Without being explicitly programmed\" is the definition of:", qa: "«دون أن تُبرمج صراحةً» تعريف:", o: ["Arthur Samuel", "Herbert Simon", "Pedro Domingos", "Tom Mitchell"], c: 0, w: "Samuel 1959."},
+  {q: "\"Learning is any process by which a system improves performance from experience\" is by:", qa: "«التعلم أي عملية يتحسن بها الأداء من الخبرة» قالها:", o: ["Herbert Simon", "Arthur Samuel", "Pedro Domingos"], c: 0, w: "Simon says: experience."},
+  {q: "In the spam example of &lt;P,T,E&gt;, E is:", qa: "في مثال البريد، E هي:", o: ["a database of emails, some with human-given labels", "the percentage of emails correctly classified", "categorizing emails as spam or legitimate"], c: 0, w: "E = Experience = قاعدة الرسائل."},
+  {q: "In &lt;P,T,E&gt;, P is the percentage of email messages correctly classified.", qa: "في P-T-E، P هي نسبة الرسائل المصنفة بشكل صحيح.", o: TF, c: 0, w: "P = Performance."}
+ ]},
+
+L11: { ch: "ch2", n: 11, title: "الأنواع بتفصيل وفئاتها", en: "Learning Types in Depth",
+ hook: "نفس الأنواع الثلاثة من الفصل الأول، لكن الآن ندخل داخل كل نوع. Supervised نوعان: <b>«A أم B؟» = تصنيف</b>، و<b>«كم؟» = انحدار</b>.",
+ guess: {q: "Predicting tomorrow's temperature is…", qa: "التنبؤ بدرجة حرارة الغد هو…", o: ["Regression", "Classification", "Clustering"], c: 0},
+ cards: [
+  {t: "Classification vs Regression", s: "Clas-si-fi-ca-tion · Re-gres-sion", a: "التصنيف والانحدار", p: "🍳 المطبخ – أطباق أم ميزان؟",
+   i: "<b>Classification</b>: فئات منفصلة (Is it A or B? سبام أم لا؟ طائر أم لا؟).<br><b>Regression</b>: قيم متصلة (How much? How many? درجة الحرارة).",
+   e: "Supervised machine learning: Learn to predict target values from labelled data. Classification (target values are discrete classes). Regression (target values are continuous values).",
+   ea: "التنبؤ بقيم مستهدفة من بيانات مسمّاة؛ التصنيف قيم منفصلة، والانحدار قيم متصلة.", k: ["Discrete · Continuous", "منفصل · متصل"]},
+  {t: "Supervised Pipeline", s: "Train · Pre-dict", a: "كيف يعمل خطوة بخطوة", p: "🍳 المطبخ – كتاب الوصفات",
+   i: "1 بيانات تدريب بملصقات · 2 خوارزمية · 3 نموذج f · 4 مثال جديد · 5 <b>ملصق متوقع</b>. «Predicting the future based on the past».",
+   e: "Training data (known labels) → learning algorithm → f; Test example → f → predicted label.",
+   ea: "بيانات بملصقات معروفة تمر بالخوارزمية فينتج f، والمثال الجديد يدخل f فيخرج ملصق متوقع.", k: ["Expected label", "ملصق متوقع"]},
+  {t: "Inductive Bias & Model", s: "In-duc-tive Bi-as", a: "التحيز الاستقرائي والنموذج", p: "🍳 لكل طاهٍ ذوقه",
+   i: "كل خوارزمية تميل لفرضيات <b>أكثر احتمالًا</b> من غيرها = inductive bias. والنموذج تقريب جيد للبيانات، يُستخدم للتنبؤ، ولكل خوارزمية bias.",
+   e: "Different learning algorithms/models have different hypotheses. Inductive bias: some hypotheses are more probable than others.",
+   ea: "للخوارزميات فرضيات مختلفة؛ التحيز الاستقرائي: بعض الفرضيات أكثر احتمالًا من غيرها.", k: ["Probable", "أكثر احتمالًا"]},
+  {t: "Supervised Categories (5)", s: "No Pain No Suc-cess, Ev-er", a: "الفئات الخمس", p: "🍳 خزائن المطبخ الخمس",
+   i: "<b>N</b>umerical: Perceptron, Logistic, SVM, NN · <b>P</b>arametric: Naïve Bayes, GDA, HMM · <b>N</b>on-parametric: k-NN, kernel regression · <b>S</b>ymbolic: Decision trees, CART · <b>E</b>nsemble: Bagging, Boosting, Random Forest.",
+   e: "Numerical classifier functions; Parametric (probabilistic) functions; Non-parametric (instance-based) functions; Symbolic functions; Aggregation (ensemble) learning.",
+   ea: "دوال عددية، بارامترية احتمالية، غير بارامترية مبنية على الحالات، رمزية، تجميعية.", k: ["Five types", "خمسة أنواع"]},
+  {t: "Unsupervised in Depth", s: "C-D-D", a: "غير الخاضع وفئاته", p: "🧺 الغسيل – 3 سلال",
+   i: "يجد <b>البنية</b> بلا ملصقات: clustering + outlier detection. مخرجه ليس ملصقًا بل: <b>Likelihood أو Cluster Id أو Better representation</b>.<br>فئاته C-D-D: Clustering (k-means, Mean-shift, Spectral) · Density estimation (GMM) · Dimensionality reduction (PCA, Factor analysis).",
+   e: "Unsupervised machine learning: Find structure in unlabeled data. Find groups of similar instances in the data (clustering). Finding unusual patterns (outlier detection).",
+   ea: "إيجاد البنية في بيانات غير مسمّاة: مجموعات متشابهة، وأنماط غير معتادة.", k: ["Structure", "بنية"]},
+  {t: "Reinforcement & ML Types Table", s: "Pre-dic-tion · De-scrip-tion", a: "المعزز وجدول الأنواع", p: "🎮 صالة الجلوس – لعبة Go",
+   i: "Reinforcement: يتعلم <b>التصرف</b> من feedback/reward، مثاله لعبة <b>Go</b>.<br>الجدول: Supervised مهمته <b>Prediction</b>، Unsupervised مهمته <b>Description</b>.",
+   e: "Reinforcement learning: learn to act based on feedback/reward. Example: learn to play Go.",
+   ea: "التعلم المعزز: تعلّم التصرف بناءً على التغذية الراجعة والمكافأة، مثال: لعبة Go.", k: ["Go", "لعبة Go"]}
+ ],
+ why: {q: "لماذا k-NN «غير بارامتري» بينما Naïve Bayes «بارامتري»؟ (ربط بالفصل الأول)", a: "Naïve Bayes يفترض توزيعًا احتماليًا للبيانات (افتراضات = بارامتري). k-NN لا يفترض شيئًا، فقط يقارن بالحالات المخزنة (instance-based = بلا توزيع). نفس فكرة المقاسات الجاهزة والتفصيل."},
+ teach: ["A or B? تصنيف، How much? انحدار", "مخرج Supervised ملصق، ومخرج Unsupervised cluster id أو likelihood", "No Pain No Success, Ever", "C-D-D وPCA لتقليل الأبعاد", "Supervised = Prediction، Unsupervised = Description"],
+ quiz: [
+  {q: "Classification target values are continuous values.", qa: "قيم التصنيف المستهدفة متصلة.", o: TF, c: 1, w: "Classification = discrete؛ Regression = continuous."},
+  {q: "\"How much? How many?\" questions are:", qa: "أسئلة «كم؟» هي:", o: ["Regression", "Classification", "Clustering", "Reinforcement"], c: 0, w: "How much = Regression."},
+  {q: "The output of an unsupervised model is:", qa: "مخرج النموذج غير الخاضع للإشراف:", o: ["Likelihood, Cluster Id, or Better representation", "Expected label", "Reward", "Program"], c: 0, w: "لا يوجد ملصق متوقع في غير الخاضع."},
+  {q: "Naïve Bayes and HMM are:", qa: "Naïve Bayes وHMM هي:", o: ["Parametric (probabilistic) functions", "Symbolic functions", "Ensemble learning", "Non-parametric functions"], c: 0, w: "Parametric."},
+  {q: "k-nearest neighbors belongs to:", qa: "k-NN تنتمي إلى:", o: ["Non-parametric (instance-based) functions", "Symbolic functions", "Parametric functions", "Dimensionality reduction"], c: 0, w: "instance-based."},
+  {q: "Decision trees and CART are:", qa: "أشجار القرار وCART:", o: ["Symbolic functions", "Numerical functions", "Ensemble learning"], c: 0, w: "Symbolic."},
+  {q: "PCA is a clustering technique.", qa: "PCA تقنية تجميع.", o: TF, c: 1, w: "PCA = Dimensionality reduction."},
+  {q: "\"Some hypotheses are more probable than others\" defines:", qa: "«بعض الفرضيات أكثر احتمالًا» تعريف:", o: ["Inductive bias", "Regression", "Overfitting", "Evaluation"], c: 0, w: "Inductive bias."}
+ ]},
+
+L12: { ch: "ch2", n: 12, title: "مكونات أي خوارزمية: R-O-E", en: "ML in a Nutshell",
+ hook: "مهما اختلفت الخوارزميات (آلاف ومئات جديدة كل سنة)، كلها من ثلاث قطع: <b>ROE</b> (بيض السمك 🐟) = Representation، Optimization، Evaluation.",
+ guess: {q: "Accuracy, precision and recall belong to…", qa: "الدقة والضبط والاستدعاء تنتمي إلى…", o: ["Evaluation", "Optimization", "Representation"], c: 0},
+ cards: [
+  {t: "ML for Fraud Detection", s: "Fraud", a: "مثال: كشف الاحتيال", p: "💳 محفظة الأب",
+   i: "عملية بطاقة ائتمان، خصائصها <b>Time, Location, Amount</b>، الخوارزمية: قواعد احتيال + تاريخ المستخدم، ثم إشعار، ورأي المستخدم يرجع ليحسّن (حلقة).",
+   e: "Data instance/example: Credit card transaction. Features: Time, Location, Amount. ML algorithm: Fraud rules, User history. Notification, User feedback.",
+   ea: "عملية بطاقة؛ الخصائص: الوقت والمكان والمبلغ؛ الخوارزمية: قواعد احتيال وتاريخ المستخدم؛ إشعار وتغذية راجعة.", k: ["Time · Location · Amount", "وقت · مكان · مبلغ"]},
+  {t: "ML Applications (6)", s: "Ap-pli-ca-tions", a: "التطبيقات الست", p: "🧰 درج العُدّة",
+   i: "1 Anomalies & threats (بطاقات، حساسات محطات نووية) · 2 Threat identification & response automation · 3 User behavior analysis · 4 Fraud detection · 5 Malware detection & classification · 6 Risk scoring for network segments.<br>والأداة العملية في المقرر: <b>Python + scikit-learn</b>.",
+   e: "Detection of anomalies and threats; Cyber threat identification and response automation; User behavior analysis; Fraud detection and prevention; Malware detection and classification; Risk scoring and prioritization for network segments.",
+   ea: "كشف الشذوذ، أتمتة الاستجابة، سلوك المستخدم، الاحتيال، البرمجيات الخبيثة، تقييم المخاطر.", k: ["Six uses", "ستة تطبيقات"]},
+  {t: "R-O-E", s: "Rep · Op-ti-mi-za-tion · E-val", a: "المكونات الثلاثة", p: "🎂 الفرن: قالب، حرارة، تذوق",
+   i: "<b>Representation</b>: شكل النموذج ونوع المصنف (القالب).<br><b>Evaluation</b>: معيار يميز الجيد من السيئ، مثل % التنبؤات الصحيحة على بيانات الاختبار (التذوق).<br><b>Optimization</b>: البحث عن أفضل إعدادات، مثل تجربة قيم k (ضبط الحرارة).",
+   e: "Machine Learning algorithm has three components: Representation – Optimization – Evaluation.",
+   ea: "لخوارزمية تعلم الآلة ثلاثة مكونات: التمثيل، التحسين، التقييم.", k: ["R-O-E", "تمثيل · تحسين · تقييم"]},
+  {t: "Representations (NSIP)", s: "N-S-I-P", a: "أنواع التمثيل", p: "🎂 4 قوالب",
+   i: "<b>N</b>umerical: Linear regression, NN, SVM · <b>S</b>ymbolic: Decision trees, Rules · <b>I</b>nstance-based: Nearest-neighbor, Case-based · <b>P</b>robabilistic graphical: Naïve Bayes, Bayesian networks, HMM.",
+   e: "Numerical functions; Symbolic functions; Instance-based functions; Probabilistic Graphical Models.",
+   ea: "دوال عددية، رمزية، مبنية على الحالات، نماذج رسومية احتمالية.", k: ["Symbolic", "رمزي"]},
+  {t: "Optimization (GDDE)", s: "Good Dogs Dig Ev-ery-where", a: "خوارزميات التحسين", p: "🎂 4 طرق لضبط الحرارة",
+   i: "<b>G</b>radient descent: Perceptron, Backpropagation · <b>D</b>ynamic programming: HMM learning · <b>D</b>ivide and conquer: Decision tree induction · <b>E</b>volutionary: Genetic algorithms, PSO.",
+   e: "Gradient descent; Dynamic Programming; Divide and Conquer; Evolutionary Computation.",
+   ea: "الانحدار التدريجي، البرمجة الديناميكية، فرّق تسد، الحوسبة التطورية.", k: ["Gradient descent", "الانحدار التدريجي"]},
+  {t: "Evaluation", s: "E-val-u-a-tion", a: "مقاييس التقييم", p: "🎂 التذوق",
+   i: "Accuracy · Precision and recall · Squared error · Likelihood · Posterior probability · Cost/Utility · Margin · Entropy · K-L divergence.",
+   e: "Evaluation: Accuracy, Precision and recall, Squared error, Likelihood, Posterior probability, Cost / Utility, Margin, Entropy, K-L divergence.",
+   ea: "التقييم: الدقة، الضبط والاستدعاء، الخطأ التربيعي، الأرجحية…", k: ["Accuracy", "الدقة"]}
+ ],
+ why: {q: "في سير العمل: لماذا يأتي التقييم قبل التحسين؟", a: "لأنك لا تستطيع أن «تحسّن» شيئًا قبل أن تعرف كيف تقيسه. تختار المعيار أولًا (مثل % الصحيح)، ثم تبحث عن الإعدادات (مثل قيمة k) التي تعطي أفضل نتيجة على هذا المعيار."},
+ teach: ["Fraud: Time, Location, Amount + حلقة feedback", "6 تطبيقات، والأداة scikit-learn", "ROE", "NSIP للتمثيل", "Good Dogs Dig Everywhere للتحسين"],
+ quiz: [
+  {q: "A machine learning algorithm has three components:", qa: "لخوارزمية تعلم الآلة ثلاثة مكونات:", o: ["Representation, Optimization, Evaluation", "Training, Testing, Validation", "Input, Hidden, Output", "Cleaning, Mining, Representation"], c: 0, w: "ROE."},
+  {q: "Backpropagation and perceptron belong to:", qa: "الانتشار العكسي والبيرسبترون ينتميان إلى:", o: ["Gradient descent (Optimization)", "Evaluation", "Symbolic representation"], c: 0, w: "Gradient descent."},
+  {q: "Accuracy, precision and recall are:", qa: "الدقة والضبط والاستدعاء:", o: ["Evaluation measures", "Optimization algorithms", "Representations"], c: 0, w: "Evaluation."},
+  {q: "\"% correct predictions on test set\" is chosen in which workflow step?", qa: "«نسبة التنبؤات الصحيحة» تُختار في أي خطوة؟", o: ["Evaluation", "Representation", "Optimization"], c: 0, w: "criterion distinguishes good vs bad = Evaluation."},
+  {q: "In the fraud detection example, the features are:", qa: "في مثال الاحتيال، الخصائص:", o: ["Time, Location, Amount", "Fraud rules, User history", "Credit card, Notification"], c: 0, w: "TLA."},
+  {q: "Genetic algorithms and PSO are:", qa: "الخوارزميات الجينية وPSO:", o: ["Evolutionary computation", "Dynamic programming", "Divide and conquer"], c: 0, w: "Evolutionary."},
+  {q: "Decision trees are a symbolic function representation.", qa: "أشجار القرار تمثيل رمزي.", o: TF, c: 0, w: "Symbolic functions: Decision trees."}
+ ]},
+
+L13: { ch: "ch2", n: 13, title: "تعلم الآلة مقابل التعلم العميق", en: "ML vs Deep Learning",
+ hook: "الفرق كله في سؤال: <b>من يصمم الخصائص؟</b> في ML الإنسان، وفي DL الطبقات تتعلمها بنفسها.",
+ guess: {q: "Deep learning usually needs…", qa: "التعلم العميق يحتاج عادة…", o: ["large amounts of training data", "very little data", "no data"], c: 0},
+ cards: [
+  {t: "ML in Practice", s: "Fea-tures + Al-go-rithm", a: "تعلم الآلة عمليًا", p: "🧩 الأب يجهّز قطع اللغز",
+   i: "عملان: <b>وصف البيانات بخصائص</b> يفهمها الحاسوب (خاص بالمجال) + <b>خوارزمية</b> تحسّن الأوزان.",
+   e: "Conventional machine learning methods rely on human-designed feature representations. ML becomes just optimizing weights to best make a final prediction.",
+   ea: "تعلم الآلة التقليدي يعتمد على خصائص يصممها الإنسان، ويصبح مجرد تحسين للأوزان.", k: ["Human-designed", "يصممه الإنسان"]},
+  {t: "Deep Learning", s: "Deep Learn-ing", a: "التعلم العميق", p: "🧠 الطفل يتعلم وحده",
+   i: "<b>طبقات متعددة</b> تتعلم تمثيل البيانات. ML: Input، Feature extraction، Classification، Output. DL: Input، (Feature extraction + Classification معًا)، Output.",
+   e: "Deep learning (DL) is a machine learning subfield that uses multiple layers for learning data representations. DL is exceptionally effective at learning patterns.",
+   ea: "فرع من تعلم الآلة يستخدم طبقات متعددة لتعلم تمثيلات البيانات.", k: ["Multiple layers", "طبقات متعددة"]},
+  {t: "Hierarchical Features", s: "P-E-T-P-O", a: "الخصائص الهرمية", p: "🧩 بناء اللغز قطعة قطعة",
+   i: "Pixels ثم <b>Edges</b> ثم Textures ثم Parts ثم Objects (منخفض، متوسط، عالي المستوى).",
+   e: "DL applies a multi-layer process for learning rich hierarchical features. Input image pixels → Edges → Textures → Parts → Objects.",
+   ea: "بكسلات، حواف، نقوش، أجزاء، أجسام.", k: ["Edges", "حواف"]},
+  {t: "Why DL is Useful", s: "End-to-end", a: "لماذا هو مفيد", p: "🧩 الطفل الذكي",
+   i: "إطار مرن للصور والنص واللغة، بإشراف أو بدونه، <b>end-to-end</b>، يحتاج <b>بيانات كثيرة</b>، تفوّق منذ <b>2010</b> (أولًا الرؤية والكلام ثم NLP).<br>مثال الرسائل: TF-IDF مع ML التقليدي، وWord Embedding مع DL.",
+   e: "DL provides a flexible, learnable framework… Can learn in supervised and unsupervised manner. DL represents an effective end-to-end learning system. Requires large amounts of training data. Since about 2010, DL has outperformed other ML techniques.",
+   ea: "إطار مرن، يتعلم بإشراف وبدونه، نظام من البداية للنهاية، يحتاج بيانات كثيرة، وتفوق منذ 2010.", k: ["End-to-end", "من البداية للنهاية"]}
+ ],
+ why: {q: "لماذا يحتاج DL بيانات أكثر من ML التقليدي؟", a: "لأنه يتعلم الخصائص بنفسه بدل أن يعطيها له الإنسان، وتعلّم الخصائص من الصفر يحتاج أمثلة كثيرة جدًا."},
+ teach: ["ML: خصائص يصممها الإنسان", "DL: طبقات متعددة، استخراج + تصنيف معًا", "Pixels, Edges, Textures, Parts, Objects", "end-to-end، بيانات كثيرة، 2010", "TF-IDF مع ML، Word Embedding مع DL"],
+ quiz: [
+  {q: "Deep learning requires small amounts of training data.", qa: "التعلم العميق يحتاج كميات قليلة من البيانات.", o: TF, c: 1, w: "Requires <b>large</b> amounts."},
+  {q: "Human-designed feature representations are used by:", qa: "الخصائص التي يصممها الإنسان يعتمد عليها:", o: ["Conventional machine learning", "Deep learning", "Autoencoders"], c: 0, w: "human-designed = ML."},
+  {q: "In hierarchical features, what comes right after pixels?", qa: "في الخصائص الهرمية، ماذا يأتي بعد البكسلات؟", o: ["Edges", "Textures", "Parts", "Objects"], c: 0, w: "P-E-T-P-O."},
+  {q: "Since about 2010, DL has outperformed other ML techniques, first in vision and speech.", qa: "منذ 2010 تفوّق DL، أولًا في الرؤية والكلام.", o: TF, c: 0, w: "ثم NLP."},
+  {q: "In the spam sample, Word Embedding is used with:", qa: "في مثال الرسائل، Word Embedding يُستخدم مع:", o: ["Deep learning", "Traditional machine learning", "Reinforcement learning"], c: 0, w: "TF-IDF مع ML، وEmbedding مع DL."},
+  {q: "In deep learning, feature extraction and classification are done together.", qa: "في DL يتم استخراج الخصائص والتصنيف معًا.", o: TF, c: 0, w: "Feature extraction + Classification."}
+ ]},
+
+L14: { ch: "ch2", n: 14, title: "الشبكات العصبية", en: "Neural Networks",
+ hook: "داخل DL توجد الشبكة العصبية. تخيّل <b>لوحة مفاتيح إضاءة</b>: كل مفتاح له قوة (وزن)، وإضاءة أساسية (انحياز)، ولمبة تقرر تشتغل أو لا (دالة التفعيل).",
+ guess: {q: "In MNIST, a 16×16 image gives how many inputs?", qa: "في MNIST، صورة 16×16 تعطي كم مدخلًا؟", o: ["256", "32", "16"], c: 0},
+ cards: [
+  {t: "MNIST", s: "M-N-I-S-T", a: "التعرف على الأرقام المكتوبة", p: "🧩 سبورة الأرقام",
+   i: "شدة كل بكسل مدخل: 16×16 = <b>256</b> (حبر = 1، بلا حبر = 0). المخرج فئة الرقم، وكل بُعد ثقة رقم، والأعلى (0.7) هو «2».",
+   e: "Handwritten digit recognition (MNIST dataset). The intensity of each pixel is considered an input element. Output is the class of the digit.",
+   ea: "التعرف على الأرقام المكتوبة: شدة كل بكسل مدخل، والمخرج فئة الرقم.", k: ["256", "بكسل"]},
+  {t: "Elements & Single Neuron", s: "W-B-A", a: "عناصر الشبكة والعصبون", p: "💡 لوحة الإضاءة",
+   i: "<b>Weights, Biases, Activation functions</b>. العصبون: z = a1w1 + … + aKwK + b ثم a = σ(z). يحوّل مدخلات إلى رقم واحد (f: R^K → R).",
+   e: "A NN with one hidden layer and one output layer: Weights, Biases, Activation functions. A single neuron maps a set of inputs into an output number.",
+   ea: "عناصر الشبكة: الأوزان والانحيازات ودوال التفعيل؛ العصبون يحول المدخلات إلى رقم.", k: ["Weights · Bias", "أوزان · انحياز"]},
+  {t: "Deep NNs (MLP)", s: "Dense", a: "الشبكات العميقة", p: "💡 طوابق من الأسلاك",
+   i: "طبقات مخفية كثيرة، <b>كثيفة</b> (Fully-connected = Dense = MLP): كل عصبون متصل بكل عصبونات الطبقة التالية.",
+   e: "Deep NNs have many hidden layers. Fully-connected (dense) layers (a.k.a. Multi-Layer Perceptron or MLP). Each neuron is connected to all neurons in the succeeding layer.",
+   ea: "طبقات مخفية كثيرة متصلة بالكامل (MLP)، كل عصبون متصل بكل عصبونات الطبقة التالية.", k: ["Dense", "كثيفة"]},
+  {t: "Deeper vs Shallow", s: "Plat-eau", a: "العميقة مقابل الضحلة", p: "💡 زيادة الطوابق",
+   i: "الأعمق أفضل… <b>حتى حد</b>، ثم يثبت الأداء (plateau).",
+   e: "Deeper networks perform better than shallow networks. But only up to some limit: after a certain number of layers, the performance of deeper networks plateaus.",
+   ea: "الأعمق أفضل من الضحلة، لكن حتى حد، ثم يثبت الأداء.", k: ["Plateaus", "يثبت"]}
+ ],
+ why: {q: "لماذا لا نضيف طبقات بلا نهاية إذا كان الأعمق أفضل؟", a: "لأن المنهج يقول إن الأداء يتحسن <b>حتى حد</b> ثم يثبت (plateau). بعده الطبقات الإضافية لا تضيف شيئًا يُذكر."},
+ teach: ["MNIST: 256 مدخل، 10 مخرجات ثقة", "W-B-A، وz ثم σ(z)", "Dense = Fully-connected = MLP", "أعمق أفضل حتى حد ثم plateau"],
+ quiz: [
+  {q: "In the MNIST example, the input is:", qa: "في مثال MNIST، المدخل:", o: ["16 × 16 = 256", "28 × 28 = 784", "10 classes", "3 colors"], c: 0, w: "16×16=256 في الشريحة."},
+  {q: "Deeper networks always perform better without any limit.", qa: "الشبكات الأعمق دائمًا أفضل بلا حد.", o: TF, c: 1, w: "plateaus after a certain number of layers."},
+  {q: "Fully-connected layers are also called:", qa: "الطبقات المتصلة بالكامل تسمى أيضًا:", o: ["Dense layers / MLP", "Convolutional layers", "Recurrent layers"], c: 0, w: "Dense = MLP."},
+  {q: "In a = σ(z), σ is the:", qa: "في a = σ(z)، σ هي:", o: ["activation function", "weight", "bias", "input"], c: 0, w: "Activation function."},
+  {q: "A single neuron maps a set of inputs into an output number.", qa: "العصبون الواحد يحول مدخلات إلى رقم مخرج.", o: TF, c: 0, w: "f: R^K → R."}
+ ]},
+
+L15: { ch: "ch2", n: 15, title: "الشبكات العميقة الأربع والتحديات", en: "CNN, RNN, LSTM, Autoencoder & Challenges",
+ hook: "لكل نوع بيانات شبكته: <b>صور = CNN</b> (عدسة)، <b>تسلسل = RNN</b> (مسلسل)، <b>تسلسل طويل = LSTM</b> (ثلاجة بثلاثة أبواب)، <b>بلا ملصقات وكشف شذوذ = Autoencoder</b> (كيس التفريغ، تذكره من الفصل الأول!).",
+ guess: {q: "Which network is best for sequential data like text and speech?", qa: "أي شبكة للبيانات التسلسلية كالنص والكلام؟", o: ["RNN", "CNN", "MLP"], c: 0},
+ cards: [
+  {t: "CNN", s: "Con-vo-lu-tion-al", a: "الشبكات الالتفافية", p: "🔍 عدسة 3×3 تنزلق على لوحة",
+   i: "للصور. مرشّح <b>ينزلق</b> على الصورة، <b>مشاركة المعاملات</b>، سريعة التدريب، <b>معاملات أقل</b> من Dense، متينة أمام إزاحة الأجسام.",
+   e: "CNNs use a convolutional operator for extracting data features. Allows parameter sharing. Efficient to train. Have less parameters than NNs with fully-connected layers. CNNs are robust to spatial translations of objects in images.",
+   ea: "تستخدم الالتفاف لاستخراج الخصائص، تشارك المعاملات، فعالة، معاملات أقل، ومتينة أمام الإزاحات.", k: ["Filter", "مرشّح"]},
+  {t: "RNN", s: "Re-cur-rent", a: "الشبكات المتكررة", p: "📺 مسلسل تتذكر حلقاته",
+   i: "للبيانات <b>التسلسلية</b> (فيديو، نص، كلام، DNA). عنصر كل مرة، والذاكرة في الحالة الداخلية. تتدرب بـ<b>backpropagation-through-time</b>، و<b>أكثر حساسية</b> لتلاشي التدرج من CNN.",
+   e: "Recurrent NNs are used for modeling sequential data… RNNs use backpropagation-through-time for training. RNNs are more sensitive to the vanishing gradient problem than CNNs.",
+   ea: "للبيانات التسلسلية، تتدرب بالانتشار العكسي عبر الزمن، وأكثر حساسية لتلاشي التدرج من CNN.", k: ["Sequential", "تسلسلي"]},
+  {t: "LSTM", s: "Long Short-Term Mem-o-ry", a: "الذاكرة طويلة قصيرة المدى", p: "🧊 ثلاجة بثلاثة أبواب",
+   i: "نوع من RNN <b>يخفف</b> تلاشي/انفجار التدرج بـ<b>Memory Cell</b> و<b>3 بوابات IFO</b>: Input (يحمي من غير المهم)، Forget (يحد ما ينتقل للخلية التالية)، Output (يمنع تمرير غير المهم). البديل الحديث GRU.",
+   e: "LSTM mitigates the vanishing/exploding gradient problem. Solution: a Memory Cell, updated at each step in the sequence. Three gates control the flow of information to and from the Memory Cell.",
+   ea: "تخفف مشكلة التدرج بخلية ذاكرة تتحكم فيها ثلاث بوابات.", k: ["Three gates", "ثلاث بوابات"]},
+  {t: "Autoencoder", s: "Au-to-en-co-der", a: "المرمّز التلقائي", p: "🧳 كيس تفريغ الهواء",
+   i: "Encoder يضغط، تمثيل <b>كامن</b>، Decoder يعيد البناء. <b>خطأ إعادة البناء</b> يكشف النشاط الخبيث، و<b>بلا ملصقات</b> فيكشف zero-day.",
+   e: "Compresses input (e.g., network traffic logs) into a smaller latent representation and reconstructs it. Learns \"normal\" patterns of behavior; reconstruction errors reveal unusual/malicious activity. Works without labeled attack data.",
+   ea: "يضغط المدخل لتمثيل كامن ويعيد بناءه؛ أخطاء إعادة البناء تكشف النشاط الخبيث، ويعمل بلا بيانات مسمّاة.", k: ["Reconstruction", "إعادة بناء"]},
+  {t: "Challenges (DIF-U)", s: "D-I-F-U", a: "تحديات ML في الأمن", p: "🏚️ السطح – 4 تشققات",
+   i: "<b>D</b>atasets كبيرة وممثلة (الجمع مكلف، وغير المتوازن يضر) · <b>I</b>nterpretability (أفضل النماذج صعبة التفسير) · Low <b>F</b>alse negatives (ملف خبيث واحد قد يكون حرجًا) · <b>U</b>pdates مستمرة (الهجمات تتطور بسرعة).",
+   e: "Need for large and representative datasets; Model interpretability; Requirement for low false negatives: Missing even one malicious file can be critical; Need for continuous updates: Adversarial attacks evolve fast.",
+   ea: "بيانات كبيرة وممثلة، قابلية التفسير، سلبيات كاذبة منخفضة، تحديث مستمر.", k: ["Challenges", "تحديات"]}
+ ],
+ why: {q: "اربط: لماذا «low false negatives» تحدٍّ مهم؟ (من الدرس 3)", a: "لأن FN = هجوم فات دون كشف (لص دخل بلا إنذار). في الأمن تفويت ملف خبيث واحد قد يكون كارثيًا، لذلك المنهج يطلب سلبيات كاذبة منخفضة."},
+ teach: ["CNN: صور، مرشح، معاملات أقل", "RNN: تسلسل، BPTT، أكثر حساسية للتلاشي", "LSTM: Memory Cell وIFO", "Autoencoder: إعادة بناء، بلا ملصقات", "DIF-U"],
+ quiz: [
+  {q: "CNNs have more parameters than NNs with fully-connected layers.", qa: "CNN لها معاملات أكثر من الطبقات المتصلة بالكامل.", o: TF, c: 1, w: "less parameters."},
+  {q: "Backpropagation-through-time is used to train:", qa: "الانتشار العكسي عبر الزمن يُستخدم لتدريب:", o: ["RNNs", "CNNs", "Autoencoders", "Random Forest"], c: 0, w: "RNN."},
+  {q: "CNNs are more sensitive to the vanishing gradient problem than RNNs.", qa: "CNN أكثر حساسية لتلاشي التدرج من RNN.", o: TF, c: 1, w: "العكس: RNNs أكثر حساسية."},
+  {q: "A memory cell controlled by three gates is found in:", qa: "خلية ذاكرة تتحكم فيها ثلاث بوابات توجد في:", o: ["LSTM", "CNN", "MLP", "Autoencoder"], c: 0, w: "LSTM."},
+  {q: "The forget gate:", qa: "بوابة النسيان:", o: ["limits information passed from one cell to the next", "protects the current step from irrelevant inputs", "prevents passing irrelevant information to later steps"], c: 0, w: "الخيار الثاني Input gate، والثالث Output gate."},
+  {q: "Reconstruction errors reveal unusual or malicious activity in:", qa: "أخطاء إعادة البناء تكشف النشاط الخبيث في:", o: ["Autoencoder", "CNN", "RNN"], c: 0, w: "Autoencoder."},
+  {q: "\"Missing even one malicious file can be critical\" explains the need for:", qa: "«تفويت ملف خبيث واحد قد يكون حرجًا» يشرح الحاجة إلى:", o: ["low false negatives", "model interpretability", "large datasets", "continuous updates"], c: 0, w: "Low FN."},
+  {q: "\"Adversarial attacks evolve fast\" explains the need for:", qa: "«الهجمات العدائية تتطور بسرعة» تشرح الحاجة إلى:", o: ["continuous updates", "low false negatives", "interpretability"], c: 0, w: "Updates."}
+ ]}
+};
+
+const ORDER = ["L1","L2","L3","L4","L5","L6","L7","L8","L9","L10","L11","L12","L13","L14","L15"];
+
+</script>
+<script>
+(function(){
+const PASS = 80;
+const app = document.getElementById('app');
+const today = () => new Date().toISOString().slice(0,10);
+const addDays = (n) => { const d = new Date(); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); };
+const qid = (L,i) => L + '-' + i;
+const allQ = (L) => LESSONS[L].quiz.map((q,i)=>({...q, id:qid(L,i), L}));
+const findQ = (id) => { const [L,i] = id.split('-'); return {...LESSONS[L].quiz[+i], id, L}; };
+const shuffle = (a) => { a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+
+// ---------- state & persistence ----------
+let S = {v:1, done:{}, box:{}, tests:{}, open:{}};
+const LK = 'mlhouse-progress-v1';
+try { const s = JSON.parse(localStorage.getItem(LK) || 'null'); if (s && s.v === 1) S = Object.assign(S, s); } catch(e){}
+let dbRef = null, saving = Promise.resolve(), saveTimer = null, saveNote = 'محفوظ على هذا الجهاز';
+function save(){
+  try { localStorage.setItem(LK, JSON.stringify(S)); } catch(e){}
+  if (!dbRef) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    const body = JSON.parse(JSON.stringify(S));
+    saving = saving.then(() => dbRef.set(body)).catch(() => {});
+  }, 700);
+}
+(async () => {
+  try {
+    if (!window.claude || !window.claude.use) return;
+    const [user, db] = await Promise.all([claude.use('user'), claude.use('db')]);
+    if (!user || !db) return;
+    const id = await user.id();
+    if (!id) return;
+    const ref = db.doc('data/users/' + id + '/progress');
+    const snap = await ref.get();
+    dbRef = ref;
+    saveNote = 'يُحفظ تقدّمك في حسابك على كل أجهزتك';
+    if (snap.exists) {
+      const d = snap.data();
+      if (d && d.v === 1) { S = Object.assign({v:1, done:{}, box:{}, tests:{}, open:{}}, JSON.parse(JSON.stringify(d))); try{localStorage.setItem(LK, JSON.stringify(S));}catch(e){} }
+    } else if (Object.keys(S.done).length || Object.keys(S.box).length) { save(); }
+    if (view.name === 'home') render();
+  } catch(e) {}
+})();
+
+// ---------- derived ----------
+const passed = (L) => (S.done[L] && S.done[L].s >= PASS);
+function unlocked(L){
+  const i = ORDER.indexOf(L);
+  return i === 0 || passed(ORDER[i-1]) || !!S.open[L];
+}
+const dueIds = () => Object.entries(S.box).filter(([id,b]) => b.due <= today()).map(([id]) => id);
+const chLessons = (ch) => ch.days.flatMap(d => d.lessons);
+
+// ---------- views ----------
+let view = {name:'home'};
+function go(v){ view = v; render(); window.scrollTo({top:0}); }
+
+function top(){
+  const n = ORDER.filter(passed).length;
+  return `<div class="top"><div class="toprow"><p class="brand">🏠 بيت تعلم الآلة</p>
+  ${view.name!=='home' ? '<button class="btn ghost small" data-act="home">الرئيسية</button>' : `<span class="meta">${n} / ${ORDER.length} درس</span>`}</div>
+  <div class="bar" aria-label="التقدم"><i style="width:${Math.round(n/ORDER.length*100)}%"></i></div></div>`;
+}
+
+function home(){
+  const due = dueIds().length;
+  let h = top();
+  h += `<div class="stack">`;
+  h += `<section class="panel"><h2>ذاكر بالطريقة التي تثبّت</h2>
+  <p class="sub">كل درس صغير ويمر بخمس خطوات مبنية على أقوى طرق التثبيت: التخمين قبل التعلم، ثم الربط، ثم الشرح بصوتك، ثم الاسترجاع. وما تخطئ فيه يرجع لك في الأيام التالية.</p>
+  <div class="method"><div><b>١ خمّن</b>قبل الدرس</div><div><b>٢ افهم</b>بطاقات قصيرة</div><div><b>٣ اربط</b>سؤال لماذا</div><div><b>٤ اشرح</b>بصوتك</div><div><b>٥ اختبر</b>٨٠٪ للعبور</div></div></section>`;
+  h += `<div class="review"><div><b>مراجعة اليوم</b><div class="meta">${due ? due + ' سؤال أخطأت فيه سابقًا وحان وقته' : 'لا شيء مستحق الآن. ابدأ درسك الجديد.'}</div></div>
+  ${due ? '<button class="btn small" data-act="review">ابدأ المراجعة (٥ دقائق)</button>' : ''}</div>`;
+  for (const ch of CHAPTERS){
+    const ls = chLessons(ch); const doneN = ls.filter(passed).length;
+    h += `<section class="chap"><div class="chhead"><div><h2>${ch.title}</h2><div class="meta en" style="text-align:right">${ch.en}</div></div>
+    <button class="btn ghost small" data-act="thread" data-ch="${ch.id}">الخيط الذي يربط الفصل</button></div>`;
+    for (const d of ch.days){
+      h += `<div class="day">اليوم ${d.d}</div>`;
+      for (const L of d.lessons){
+        const l = LESSONS[L], u = unlocked(L), dn = S.done[L];
+        const chip = dn ? (dn.s >= PASS ? `<span class="chip done">✓ ${dn.s}%</span>` : `<span class="chip retry">${dn.s}% أعد</span>`) : (u ? '<span class="chip go">ابدأ</span>' : '<span class="chip lock">🔒 مقفل</span>');
+        h += `<button class="row ${u?'':'locked'}" data-act="lesson" data-l="${L}"><span class="num">${l.n}</span><span class="tx"><b>${l.title}</b><span class="en">${l.en}</span></span>${chip}</button>`;
+      }
+    }
+    const allDone = doneN === ls.length, best = S.tests[ch.id];
+    h += `<button class="row ${allDone?'':'locked'}" data-act="test" data-ch="${ch.id}"><span class="num">★</span><span class="tx"><b>اختبار الفصل ${ch.n} الشامل</b><span>١٢ سؤالًا مخلوطًا من كل الدروس</span></span>${best!=null?`<span class="chip done">أفضل ${best}%</span>`:(allDone?'<span class="chip go">ابدأ</span>':`<span class="chip lock">${doneN}/${ls.length}</span>`)}</button></section>`;
+  }
+  h += `<section class="chap"><h2>قادم</h2>
+  <div class="row soon locked"><span class="num">٣</span><span class="tx"><b>الفصل الثالث</b><span>يُضاف هنا عندما ينزّله الدكتور</span></span><span class="chip lock">قريبًا</span></div>
+  <div class="row soon locked"><span class="num">⛓</span><span class="tx"><b>مادة البلوكتشين</b><span>قسم مستقل بنفس الطريقة</span></span><span class="chip lock">قريبًا</span></div></section>`;
+  h += `<p class="save">${saveNote}</p></div>`;
+  return h;
+}
+
+function thread(chId){
+  const ch = CHAPTERS.find(c=>c.id===chId);
+  return top() + `<section class="panel thread"><h2>الخيط الذي يربط ${ch.title}</h2><p class="sub">اقرأها كقصة واحدة. إذا فهمت لماذا تأتي كل حلقة بعد التي قبلها، صار الحفظ أسهل بكثير.</p>${ch.thread.map(p=>`<p>${p}</p>`).join('')}
+  <div class="nav"><button class="btn" data-act="home">رجوع</button></div></section>`;
+}
+
+// ----- lesson flow -----
+const STEPS = ['خمّن','افهم','اربط','اشرح','اختبر'];
+function stepsBar(k){ return `<div class="steps">${STEPS.map((s,i)=>`<span class="${i===k?'on':(i<k?'past':'')}">${s}</span>`).join('')}</div>`; }
+
+function lessonView(){
+  const L = view.L, l = LESSONS[L], st = view.step;
+  let h = top() + `<h2>${l.n}. ${l.title}</h2><div class="meta en" style="text-align:right;margin-bottom:8px">${l.en}</div>` + stepsBar(st);
+  if (st === 0){
+    const g = l.guess, a = view.gAns;
+    h += `<section class="panel"><h3>خمّن قبل أن تتعلم</h3><p class="sub">لا يُحسب عليك. التخمين يجهّز عقلك فيلتقط الجواب حين يمر عليك.</p>
+    <p class="q">${g.q}</p><p class="qa">${g.qa}</p><div class="opts">${g.o.map((o,i)=>`<button class="opt ${a!=null?(i===g.c?'right':(i===a?'wrong':'')):''}" data-act="guess" data-i="${i}" ${a!=null?'disabled':''}>${o}</button>`).join('')}</div>
+    ${a!=null?`<div class="fb ${a===g.c?'ok':'no'}"><b class="t">${a===g.c?'تخمين صحيح!':'ليس تمامًا'}</b>ستعرف السبب في البطاقات.</div><div class="nav"><span></span><button class="btn" data-act="step" data-s="1">ابدأ الدرس</button></div>`:''}</section>`;
+  } else if (st === 1){
+    const i = view.card, c = l.cards[i];
+    h += (i===0?`<div class="hook">${l.hook}</div>`:'');
+    h += `<section class="panel card"><span class="place">${c.p}</span>
+    <p class="term">${c.t}</p><div class="syl">${c.s}</div><div class="ar">${c.a}</div>
+    <div class="idea">${c.i}</div>
+    <div class="exam"><div class="lbl">نص المنهج كما يأتي في الاختبار</div><p class="e">${c.e}</p><div class="ea">${c.ea}</div></div>
+    <div class="kw"><span class="k1">${c.k[0]}</span><span class="k2">${c.k[1]}</span><small>كلمة الاستدلال</small></div></section>
+    <div class="dots">${l.cards.map((_,j)=>`<i class="${j===i?'on':''}"></i>`).join('')}</div>
+    <div class="nav">${i>0?'<button class="btn ghost" data-act="card" data-d="-1">السابق</button>':'<span></span>'}
+    ${i<l.cards.length-1?'<button class="btn" data-act="card" data-d="1">التالي</button>':'<button class="btn" data-act="step" data-s="2">إلى الربط</button>'}</div>`;
+  } else if (st === 2){
+    h += `<section class="panel"><h3>اربط: سؤال «لماذا؟»</h3><p class="sub">فكّر في الجواب بنفسك ١٥ ثانية قبل أن تكشفه. هذه أقوى خطوة للفهم.</p>
+    <p style="font-weight:700">${l.why.q}</p>
+    ${view.rev?`<div class="reveal">${l.why.a}</div>`:'<button class="btn ghost" data-act="rev">اكشف الجواب</button>'}
+    <div class="nav"><button class="btn ghost" data-act="step" data-s="1">رجوع للبطاقات</button><button class="btn" data-act="step" data-s="3" ${view.rev?'':'disabled'}>التالي</button></div></section>`;
+  } else if (st === 3){
+    const ck = view.ck || [];
+    h += `<section class="panel"><h3>اشرحها بصوتك</h3><p class="sub">أغلق عينيك أو اقلب الجوال، واشرح الدرس بصوت مسموع في دقيقة كأنك تشرحه لطالب. ثم علّم على ما ذكرته.</p>
+    ${l.teach.map((t,j)=>`<label class="check"><input type="checkbox" id="ck-${L}-${j}" data-act="ck" data-j="${j}" ${ck[j]?'checked':''}><span>${t}</span></label>`).join('')}
+    <p class="meta">${ck.filter(Boolean).length < l.teach.length ? 'ما لم تذكره ارجع له في البطاقات، ثم تابع.' : 'ممتاز، ذكرت كل النقاط.'}</p>
+    <div class="nav"><button class="btn ghost" data-act="step" data-s="1">رجوع للبطاقات</button><button class="btn" data-act="startquiz">ابدأ الاختبار</button></div></section>`;
+  } else {
+    h += quizBody();
+  }
+  return h;
+}
+
+// ----- quiz engine (lesson / review / test) -----
+function prepQ(q){
+  const idx = q.o === TF ? [0,1] : shuffle(q.o.map((_,i)=>i));
+  return {...q, idx};
+}
+function startQuiz(kind, list, meta){
+  view = Object.assign({}, view, {quiz:{kind, list:list.map(prepQ), i:0, ans:null, right:0, wrongIds:[], meta}});
+  if (kind === 'lesson') view.step = 4;
+  render(); window.scrollTo({top:0});
+}
+function quizBody(){
+  const Q = view.quiz;
+  if (Q.i >= Q.list.length) return resultBody();
+  const q = Q.list[Q.i], a = Q.ans, tf = q.o === TF;
+  let h = `<section class="panel"><div class="chhead"><span class="qcount">سؤال ${Q.i+1} من ${Q.list.length}</span>${Q.kind!=='lesson'?`<span class="meta">من درس ${LESSONS[q.L].n}</span>`:''}</div>
+  <p class="q" style="margin-top:8px">${q.q}</p><p class="qa">${q.qa}</p><div class="opts">`;
+  h += q.idx.map(i => {
+    let cls = 'opt' + (tf?' tf':'');
+    if (a != null){ if (i === q.c) cls += ' right'; else if (i === a) cls += ' wrong'; }
+    return `<button class="${cls}" data-act="ans" data-i="${i}" ${a!=null?'disabled':''}>${q.o[i]}</button>`;
+  }).join('') + `</div>`;
+  if (a != null){
+    const ok = a === q.c;
+    h += `<div class="fb ${ok?'ok':'no'}"><b class="t">${ok?'صح ✓':'خطأ ✗ — الصحيح: '+(tf?q.o[q.c]:'<span class="en">'+q.o[q.c]+'</span>')}</b>${q.w}</div>
+    <div class="nav"><span></span><button class="btn" data-act="nextq">${Q.i < Q.list.length-1 ? 'التالي' : 'النتيجة'}</button></div>`;
+  }
+  return h + `</section>`;
+}
+function resultBody(){
+  const Q = view.quiz, pct = Math.round(Q.right / Q.list.length * 100);
+  let h = `<section class="panel" style="text-align:center"><div class="big">${pct}%</div><p class="sub">${Q.right} صحيحة من ${Q.list.length}</p>`;
+  if (Q.kind === 'lesson'){
+    const L = view.L, idx = ORDER.indexOf(L), nxt = ORDER[idx+1];
+    if (pct >= PASS){
+      h += `<p><b>عبرت الدرس.</b> ${Q.wrongIds.length ? 'الأسئلة التي أخطأت فيها ستعود لك غدًا في المراجعة.' : 'بلا أخطاء، ممتاز.'}</p>`;
+      h += `<p class="sub">قبل أن تنتقل: قل كلمات الاستدلال بصوتك مرة أخيرة دون النظر.</p>`;
+      h += `<div class="nav" style="justify-content:center;flex-wrap:wrap">${nxt ? `<button class="btn" data-act="lesson" data-l="${nxt}">الدرس التالي</button>` : ''}<button class="btn ghost" data-act="home">الرئيسية</button></div>`;
+    } else {
+      h += `<p><b>تحتاج ${PASS}% للعبور.</b> هذا طبيعي في المحاولة الأولى. راجع البطاقات بسرعة ثم أعد الاختبار.</p>
+      <div class="nav" style="justify-content:center;flex-wrap:wrap"><button class="btn" data-act="step" data-s="1">راجع البطاقات</button><button class="btn ghost" data-act="startquiz">أعد الاختبار</button></div>`;
+    }
+  } else if (Q.kind === 'review'){
+    h += `<p>${Q.wrongIds.length ? 'ما أخطأت فيه سيعود غدًا. وما أصبت فيه يتباعد موعده.' : 'كل المراجعة صحيحة. انتقل لدرسك الجديد.'}</p><div class="nav" style="justify-content:center"><button class="btn" data-act="home">الرئيسية</button></div>`;
+  } else {
+    h += `<p>${pct >= PASS ? 'الفصل ثابت عندك. راجع الخيط الذي يربطه مرة قبل النوم.' : 'راجع الدروس التي ظهرت في أخطائك، ثم أعد الاختبار غدًا.'}</p><div class="nav" style="justify-content:center;flex-wrap:wrap"><button class="btn ghost" data-act="thread" data-ch="${Q.meta}">الخيط الذي يربط الفصل</button><button class="btn" data-act="home">الرئيسية</button></div>`;
+  }
+  return h + `</section>`;
+}
+function finishQuiz(){
+  const Q = view.quiz, pct = Math.round(Q.right / Q.list.length * 100);
+  if (Q.kind === 'lesson'){
+    const prev = S.done[view.L];
+    if (!prev || pct >= prev.s) S.done[view.L] = {s:pct, t:today()};
+  } else if (Q.kind === 'test'){
+    const prev = S.tests[Q.meta]; if (prev == null || pct > prev) S.tests[Q.meta] = pct;
+  }
+  save();
+}
+function grade(q, ok){
+  const b = S.box[q.id];
+  if (!ok){ S.box[q.id] = {b:1, due:addDays(1)}; return; }
+  if (view.quiz.kind === 'review' && b){
+    if (b.b >= 3) delete S.box[q.id];
+    else S.box[q.id] = {b:b.b+1, due:addDays(b.b === 1 ? 3 : 7)};
+  }
+}
+
+function render(){
+  let h;
+  if (view.name === 'home') h = home();
+  else if (view.name === 'thread') h = thread(view.ch);
+  else if (view.name === 'lesson') h = lessonView();
+  else h = top() + `<h2>${view.name==='review'?'مراجعة اليوم':'اختبار الفصل'}</h2><p class="sub">${view.name==='review'?'أسئلة أخطأت فيها سابقًا. الاسترجاع المتباعد يثبّتها.':'أسئلة مخلوطة من كل الدروس، تمامًا كالاختبار الحقيقي.'}</p>` + quizBody();
+  app.innerHTML = h;
+}
+
+app.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-act]'); if (!el) return;
+  const act = el.dataset.act;
+  if (act === 'ck') return;
+  if (act === 'home') return go({name:'home'});
+  if (act === 'thread') return go({name:'thread', ch:el.dataset.ch});
+  if (act === 'lesson'){
+    const L = el.dataset.l;
+    if (!unlocked(L)){
+      if (!view.confirmOpen || view.confirmOpen !== L){ view.confirmOpen = L; el.querySelector('.chip').textContent = 'اضغط مرة أخرى لفتحه'; return; }
+      S.open[L] = true; save();
+    }
+    return go({name:'lesson', L, step:0, card:0, gAns:null, rev:false, ck:[]});
+  }
+  if (act === 'test'){
+    const ch = CHAPTERS.find(c=>c.id===el.dataset.ch);
+    const ls = chLessons(ch);
+    if (!ls.every(passed) && !view.confirmTest){ view.confirmTest = true; el.querySelector('.chip').textContent = 'لم تنهِ الدروس، اضغط للبدء على أي حال'; return; }
+    const pool = shuffle(ls.flatMap(allQ)).slice(0, 12);
+    view = {name:'test'}; return startQuiz('test', pool, ch.id);
+  }
+  if (act === 'review'){
+    const ids = shuffle(dueIds()).slice(0, 15);
+    view = {name:'review'}; return startQuiz('review', ids.map(findQ));
+  }
+  if (act === 'guess'){ view.gAns = +el.dataset.i; return render(); }
+  if (act === 'step'){ view.step = +el.dataset.s; if (view.step === 1) view.card = view.card || 0; render(); return window.scrollTo({top:0}); }
+  if (act === 'card'){ view.card += +el.dataset.d; render(); return window.scrollTo({top:0}); }
+  if (act === 'rev'){ view.rev = true; return render(); }
+  if (act === 'startquiz'){ return startQuiz('lesson', shuffle(allQ(view.L))); }
+  if (act === 'ans'){
+    const Q = view.quiz, q = Q.list[Q.i], a = +el.dataset.i; if (Q.ans != null) return;
+    Q.ans = a; const ok = a === q.c; if (ok) Q.right++; else Q.wrongIds.push(q.id);
+    grade(q, ok); save(); return render();
+  }
+  if (act === 'nextq'){
+    const Q = view.quiz; Q.i++; Q.ans = null;
+    if (Q.i >= Q.list.length) finishQuiz();
+    render(); return window.scrollTo({top:0});
+  }
+});
+app.addEventListener('change', (e) => {
+  const el = e.target; if (el.dataset.act !== 'ck') return;
+  view.ck = view.ck || []; view.ck[+el.dataset.j] = el.checked; render();
+});
+
+render();
+})();
+</script>
+
+</body></html>
